@@ -1,0 +1,13 @@
+#main-container {
+  margin: auto;
+  max-width: 1024px;
+  min-width: 240px;
+}
+
+.container {
+  padding: 20px;
+}
+
+@media (max-width: 600px) {
+  .container::before { background-position: center -10px; }
+}
