@@ -9,10 +9,10 @@
         <relativePath/>
     </parent>
     <groupId>pl.dw</groupId>
-    <artifactId>meet-game-jam</artifactId>
+    <artifactId>jam-organizer</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Meet Game Jam</name>
-    <description>Application to manage game dev jam&apos;s events</description>
+    <description>Application to manage jam events</description>
     <properties>
         <java.version>11</java.version>
     </properties>
@@ -25,10 +25,10 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
-<!--        <dependency>-->
-<!--            <groupId>org.springframework.boot</groupId>-->
-<!--            <artifactId>spring-boot-starter-security</artifactId>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>

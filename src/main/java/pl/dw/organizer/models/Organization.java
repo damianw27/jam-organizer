@@ -1,7 +1,7 @@
-package pl.dw.meetgamejam.models;
+package pl.dw.organizer.models;
 
 import lombok.Data;
-import pl.dw.meetgamejam.entities.OrganizationEntity;
+import pl.dw.organizer.entities.OrganizationEntity;
 
 import java.util.List;
 import java.util.stream.Collectors;

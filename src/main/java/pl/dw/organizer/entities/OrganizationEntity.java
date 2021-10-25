@@ -1,4 +1,4 @@
-package pl.dw.meetgamejam.entities;
+package pl.dw.organizer.entities;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

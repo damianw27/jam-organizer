@@ -1,8 +1,9 @@
-package pl.dw.meetgamejam.entities;
+package pl.dw.organizer.entities;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import pl.dw.organizer.enums.UserRole;
 
 import javax.persistence.*;
 import java.util.Calendar;
@@ -19,6 +20,7 @@ public class UserEntity {
     private String displayName;
     private String email;
     private String phoneNumber;
+    private UserRole userRole;
     private Calendar jobStart;
     private Calendar created;
     private Calendar suspendExpiration;

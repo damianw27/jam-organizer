@@ -1,7 +1,7 @@
-package pl.dw.meetgamejam.models;
+package pl.dw.organizer.models;
 
 import lombok.Data;
-import pl.dw.meetgamejam.entities.UserEntity;
+import pl.dw.organizer.entities.UserEntity;
 
 import java.util.Calendar;
 

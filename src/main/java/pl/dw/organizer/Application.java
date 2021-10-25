@@ -1,11 +1,11 @@
-package pl.dw.meetgamejam;
+package pl.dw.organizer;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import pl.dw.meetgamejam.entities.UserEntity;
-import pl.dw.meetgamejam.repositories.UserRepository;
+import pl.dw.organizer.entities.UserEntity;
+import pl.dw.organizer.repositories.UserRepository;
 
 @SpringBootApplication
 public class Application {
