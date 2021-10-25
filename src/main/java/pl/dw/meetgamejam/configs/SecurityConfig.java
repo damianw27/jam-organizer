@@ -1,4 +1,4 @@
-package pl.dw.meetgamejam.config;
+package pl.dw.meetgamejam.configs;
 
 //@Configuration
 //@EnableWebSecurity
