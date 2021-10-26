@@ -7,6 +7,7 @@ import pl.dw.organizer.enums.UserRole;
 
 import javax.persistence.*;
 import java.util.Calendar;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -16,14 +17,26 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
+
     private String displayName;
+
     private String email;
+
     private String phoneNumber;
+
     private UserRole userRole;
+
     private Calendar jobStart;
+
     private Calendar created;
+
     private Calendar suspendExpiration;
+
     @ManyToOne
     private OrganizationEntity organization;
+
+    @OneToMany
+    private Set<MemberEntity> membership;
 }

@@ -15,8 +15,11 @@ public class OrganizationEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
+
     private String country;
-    @ManyToMany
+
+    @OneToMany
     private Set<UserEntity> users;
 }

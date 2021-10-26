@@ -19,13 +19,13 @@ public class Organization {
         organization.setName(organizationEntity.getName());
         organization.setCountry(organizationEntity.getCountry());
 
-        List<User> users = organizationEntity
-            .getUsers()
-            .stream()
-            .map(userEntity -> User.of(userEntity, organization))
-            .collect(Collectors.toList());
+//        List<User> users = organizationEntity
+//            .getUsers()
+//            .stream()
+//            .map(userEntity -> User.of(userEntity, organization))
+//            .collect(Collectors.toList());
 
-        organization.setUsers(users);
+//        organization.setUsers(users);
         return organization;
     }
 }
