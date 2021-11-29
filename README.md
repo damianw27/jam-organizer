@@ -3,7 +3,7 @@
 Need some description...
 
 ## DATABASE DIAGRAM
-![Database Diagram](./images/data_base.png)
+![Database Diagram](images/data_base.png)
 
 ## TECHNOLOGIES
 
@@ -16,7 +16,7 @@ Need some description...
 
 ## How to run?
 
-At this stage of project, there is no executable file so user needs to build this project by himself.
+At this stage of project, there is no executable file so applicationUser needs to build this project by himself.
 
 
 ## TODO

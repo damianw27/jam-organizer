@@ -2,6 +2,7 @@
   margin: auto;
   max-width: 1024px;
   min-width: 240px;
+  height: max-content;
 }
 
 .container {
@@ -9,5 +10,7 @@
 }
 
 @media (max-width: 600px) {
-  .container::before { background-position: center -10px; }
+  .container::before {
+    background-position: center -10px;
+  }
 }
