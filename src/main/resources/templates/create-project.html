@@ -5,6 +5,75 @@
     <title>Title</title>
 </head>
 <body>
+<form class="form" th:action="@{/project}" method="post">
+    <div class="field">
+        <div class="field-label-container">
+            <label for="name" class="field-label">Name</label>
+        </div>
+        <div class="field-input-container">
+            <input name="name" id="name" type="text"/>
+        </div>
+    </div>
 
+    <div class="field">
+        <div class="field-label-container">
+            <label for="descriptionLink" class="field-label">Description</label>
+        </div>
+        <div class="field-input-container">
+            <input name="descriptionLink" id="descriptionLink" type="text"/>
+        </div>
+    </div>
+
+    <div class="field">
+        <div class="field-label-container">
+            <label for="submissionsStart" class="field-label">submissionsStart</label>
+        </div>
+        <div class="field-input-container">
+            <input name="submissionsStart" id="submissionsStart" type="date"/>
+        </div>
+    </div>
+
+    <div class="field">
+        <div class="field-label-container">
+            <label for="submissionsEnd" class="field-label">submissionsEnd</label>
+        </div>
+        <div class="field-input-container">
+            <input name="submissionsEnd" id="submissionsEnd" type="date"/>
+        </div>
+    </div>
+
+    <div class="field">
+        <div class="field-label-container">
+            <label for="judgementsStart" class="field-label">judgementsStart</label>
+        </div>
+        <div class="field-input-container">
+            <input name="judgementsStart" id="judgementsStart" type="date"/>
+        </div>
+    </div>
+
+    <div class="field">
+        <div class="field-label-container">
+            <label for="judgementsEnd" class="field-label">judgementsEnd</label>
+        </div>
+        <div class="field-input-container">
+            <input name="judgementsEnd" id="judgementsEnd" type="date"/>
+        </div>
+    </div>
+
+    <div class="field">
+        <div class="field-label-container">
+            <label for="resultsDate" class="field-label">resultsDate</label>
+        </div>
+        <div class="field-input-container">
+            <input name="resultsDate" id="resultsDate" type="date"/>
+        </div>
+    </div>
+
+    <input name="operationType" type="hidden" value="CREATE_EVENT"/>
+
+    <button type="reset">Reset</button>
+    <button type="submit">Create Event</button>
+
+</form>
 </body>
 </html>

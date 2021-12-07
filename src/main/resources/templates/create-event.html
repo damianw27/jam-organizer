@@ -23,7 +23,7 @@
         </ul>
     </div>
     <div class="container">
-        <form class="form" method="post" action="/create-event">
+        <form class="form" method="post" th:action="@{/event}">
             <div class="field">
                 <div class="field-label-container">
                     <label for="name" class="field-label">Name</label>
@@ -90,7 +90,7 @@
             <input name="operationType" type="hidden" value="CREATE_EVENT"/>
 
             <button type="reset">Reset</button>
-            <button type="submit">Register</button>
+            <button type="submit">Create Event</button>
 
         </form>
     </div>

@@ -1,16 +1,22 @@
 package pl.wilenskid.jamorganizer.bean;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import java.util.List;
 
-@Data
-@EqualsAndHashCode(callSuper = true)
-public class CreateEventBean extends AbstractOperationBean {
-    private String name;
+import lombok.Builder;
+import lombok.Getter;
+
+@Getter
+@Builder
+public class EventBean {
+	private Long id;
+	private String name;
     private String descriptionLink;
     private String submissionsStart;
     private String submissionsEnd;
     private String judgementsStart;
     private String judgementsEnd;
     private String resultsDate;
+    private List<Long> members;
+    private List<Long> criteria;
+    private List<Long> submissions;
 }

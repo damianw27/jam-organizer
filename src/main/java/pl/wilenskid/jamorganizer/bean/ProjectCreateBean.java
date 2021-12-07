@@ -1,11 +1,9 @@
 package pl.wilenskid.jamorganizer.bean;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 @Data
-@EqualsAndHashCode(callSuper = true)
-public class CreateProjectBean extends AbstractOperationBean {
+public class ProjectCreateBean {
     private String title;
     private String descriptionLink;
     private String logoLink;

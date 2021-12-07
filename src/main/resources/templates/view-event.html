@@ -8,6 +8,7 @@
 <!-- /* @thymesVar id="projects" type="java.util.List<pl.wilenskid.jamorganizer.entity.Project>" */ -->
 <!-- /* @thymesVar id="project" type="pl.wilenskid.jamorganizer.entity.Project" */ -->
 <!-- /* @thymesVar id="user" type="pl.wilenskid.jamorganizer.entity.ApplicationUser" */ -->
+<!-- /* @thymesVar id="timeService" type="pl.wilenskid.jamorganizer.service.TimeService" */ -->
 
 <head>
     <meta content="width=device-width,initial-scale=1,maximum-scale=1,applicationUser-scalable=no"
@@ -33,6 +34,10 @@
         <li>Judgments End: <b th:text="${event.getSubmissionsEnd()}"></b></li>
         <li>Results Date: <b th:text="${event.getResultsDate()}"></b></li>
     </ul>
+
+    <form action="#" th:action="@{/event/{id}(id=*{event.getId()})}" th:method="DELETE">
+        <button type="submit" value="delete">Delete</button>
+    </form>
 
     <h3>Organizers</h3>
     <ul th:each="user: ${organizers}">

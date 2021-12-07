@@ -16,7 +16,6 @@ import pl.wilenskid.jamorganizer.entity.ApplicationUser;
 import pl.wilenskid.jamorganizer.repository.ApplicationUserRepository;
 
 import javax.inject.Inject;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Spliterator;
 import java.util.stream.StreamSupport;

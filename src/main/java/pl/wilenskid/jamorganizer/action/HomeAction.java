@@ -27,7 +27,7 @@ public class HomeAction extends BaseAction {
 
     @Override
     public void onLoad(HttpServletRequest request, HttpServletResponse response, Map<String, String> pathParams) {
-        events = eventService.getAllEvents();
+        events = eventService.getAll();
     }
 
     @Override

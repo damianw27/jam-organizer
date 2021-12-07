@@ -24,7 +24,7 @@ public abstract class BaseAction {
     }
 
     @RequestMapping
-    public String getActionTemplateView(HttpServletRequest request, HttpServletResponse response, Model model) {
+    public String getActionTemplateView(HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
         Map<String, String> pathParams = getPathParams();
         onLoad(request, response, pathParams);
         putMethodsAndFields(model);
@@ -36,7 +36,7 @@ public abstract class BaseAction {
         return baseTemplatePath;
     }
 
-    public abstract void onLoad(HttpServletRequest request, HttpServletResponse response, Map<String, String> pathParams);
+    public abstract void onLoad(HttpServletRequest request, HttpServletResponse response, Map<String, String> pathParams) throws Exception;
 
     public abstract List<ApplicationUserRole> getAllowedRoles();
 

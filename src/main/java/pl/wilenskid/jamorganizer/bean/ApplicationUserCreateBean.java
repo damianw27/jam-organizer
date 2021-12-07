@@ -1,15 +1,13 @@
 package pl.wilenskid.jamorganizer.bean;
 
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import pl.wilenskid.jamorganizer.entity.Organization;
 import pl.wilenskid.jamorganizer.enums.ApplicationUserRole;
 
 import java.util.Set;
 
 @Data
-@EqualsAndHashCode(callSuper = true)
-public class CreateApplicationUserBean extends AbstractOperationBean {
+public class ApplicationUserCreateBean {
     private String name;
     private String displayName;
     private String email;

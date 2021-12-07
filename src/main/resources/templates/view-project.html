@@ -40,7 +40,7 @@
     <h3>Authors</h3>
 
     <ul th:each="user: ${authors}">
-        <li><a th:text="${user.getDisplayName()}" th:href="'/app-user/view'"></a></li>
+        <li><a th:text="${user.getDisplayName()}" th:href="@{/app-user/view?appUserId={id}(id=*{user.getId()})}"></a></li>
     </ul>
 
     <h3>Comments</h3>
