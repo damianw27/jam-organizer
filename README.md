@@ -95,9 +95,6 @@ W ramach poprawnego funkcjonowania aplikacji system powinien:
 - zapewniać niezawodność działania o każdej porze dnia,
 - działać niezmiennie na różnych przeglądarkach.
 
-## DATABASE DIAGRAM
-![Database Diagram](images/data_base.png)
-
 ## Technologie
 
 * Java 11
