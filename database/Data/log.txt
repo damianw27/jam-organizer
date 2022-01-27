@@ -1,0 +1,86 @@
+2022-01-27 09:41:39.280 CET [11648] LOG:  listening on IPv6 address "::1", port 5432
+2022-01-27 09:41:39.280 CET [11648] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2022-01-27 09:41:39.470 CET [10380] LOG:  database system was shut down at 2022-01-27 09:41:20 CET
+2022-01-27 09:41:39.549 CET [11648] LOG:  database system is ready to accept connections
+2022-01-27 09:44:53.754 CET [8456] ERROR:  constraint "uk_3fg7rts7rrjq6ed0aeoadt5c6" of relation "files_group_files" does not exist
+2022-01-27 09:44:53.754 CET [8456] STATEMENT:  alter table files_group_files drop constraint UK_3fg7rts7rrjq6ed0aeoadt5c6
+2022-01-27 09:44:53.803 CET [8456] ERROR:  constraint "uk_5y9ya19q1bkf1nvkyndc3hc7t" of relation "project_endorsements" does not exist
+2022-01-27 09:44:53.803 CET [8456] STATEMENT:  alter table project_endorsements drop constraint UK_5y9ya19q1bkf1nvkyndc3hc7t
+2022-01-27 09:44:53.853 CET [8456] ERROR:  constraint "uk_c5xxac1mpi7f65lq98kcxhrol" of relation "user_data_comments" does not exist
+2022-01-27 09:44:53.853 CET [8456] STATEMENT:  alter table user_data_comments drop constraint UK_c5xxac1mpi7f65lq98kcxhrol
+2022-01-27 09:44:53.892 CET [8456] ERROR:  constraint "uk_60s92jxygglcw7a7n6s4gtihc" of relation "user_data_endorsements" does not exist
+2022-01-27 09:44:53.892 CET [8456] STATEMENT:  alter table user_data_endorsements drop constraint UK_60s92jxygglcw7a7n6s4gtihc
+2022-01-27 09:44:54.232 CET [8456] ERROR:  constraint "uk_7w7ig6hthotaisip6e810ch0o" of relation "user_data_files" does not exist
+2022-01-27 09:44:54.232 CET [8456] STATEMENT:  alter table user_data_files drop constraint UK_7w7ig6hthotaisip6e810ch0o
+2022-01-27 09:59:26.888 CET [11648] LOG:  server process (PID 6620) was terminated by exception 0xC000013A
+2022-01-27 09:59:26.888 CET [11648] DETAIL:  Failed process was running: COMMIT
+2022-01-27 09:59:26.888 CET [11648] HINT:  See C include file "ntstatus.h" for a description of the hexadecimal value.
+2022-01-27 09:59:26.888 CET [11648] LOG:  terminating any other active server processes
+2022-01-27 09:59:26.889 CET [3852] WARNING:  terminating connection because of crash of another server process
+2022-01-27 09:59:26.889 CET [3852] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+2022-01-27 09:59:26.889 CET [3852] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+2022-01-27 09:59:26.890 CET [7728] WARNING:  terminating connection because of crash of another server process
+2022-01-27 09:59:26.890 CET [7728] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+2022-01-27 09:59:26.890 CET [7728] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+2022-01-27 09:59:26.890 CET [8456] WARNING:  terminating connection because of crash of another server process
+2022-01-27 09:59:26.890 CET [8456] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+2022-01-27 09:59:26.890 CET [8456] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+2022-01-27 09:59:26.891 CET [6000] WARNING:  terminating connection because of crash of another server process
+2022-01-27 09:59:26.891 CET [6000] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+2022-01-27 09:59:26.891 CET [6000] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+2022-01-27 09:59:26.891 CET [576] WARNING:  terminating connection because of crash of another server process
+2022-01-27 09:59:26.891 CET [576] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+2022-01-27 09:59:26.891 CET [576] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+2022-01-27 09:59:26.892 CET [12496] WARNING:  terminating connection because of crash of another server process
+2022-01-27 09:59:26.892 CET [12496] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+2022-01-27 09:59:26.892 CET [12496] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+2022-01-27 09:59:26.893 CET [15044] WARNING:  terminating connection because of crash of another server process
+2022-01-27 09:59:26.893 CET [15044] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+2022-01-27 09:59:26.893 CET [15044] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+2022-01-27 09:59:26.926 CET [11648] LOG:  all server processes terminated; reinitializing
+2022-01-27 09:59:26.987 CET [5032] LOG:  database system was interrupted; last known up at 2022-01-27 09:51:43 CET
+2022-01-27 09:59:27.727 CET [5032] LOG:  database system was not properly shut down; automatic recovery in progress
+2022-01-27 09:59:27.822 CET [5032] LOG:  redo starts at 0/16CA2A8
+2022-01-27 09:59:27.822 CET [5032] LOG:  invalid record length at 0/16CA388: wanted 24, got 0
+2022-01-27 09:59:27.822 CET [5032] LOG:  redo done at 0/16CA350
+2022-01-27 09:59:28.105 CET [11648] LOG:  database system is ready to accept connections
+2022-01-27 09:59:30.567 CET [11648] LOG:  worker process: logical replication launcher (PID 15224) was terminated by exception 0xC000013A
+2022-01-27 09:59:30.567 CET [11648] HINT:  See C include file "ntstatus.h" for a description of the hexadecimal value.
+2022-01-27 09:59:30.567 CET [11648] LOG:  terminating any other active server processes
+2022-01-27 09:59:30.569 CET [15324] WARNING:  terminating connection because of crash of another server process
+2022-01-27 09:59:30.569 CET [15324] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+2022-01-27 09:59:30.569 CET [15324] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+2022-01-27 09:59:30.570 CET [11648] LOG:  statistics collector process (PID 5064) was terminated by exception 0xC000013A
+2022-01-27 09:59:30.570 CET [11648] HINT:  See C include file "ntstatus.h" for a description of the hexadecimal value.
+2022-01-27 09:59:30.571 CET [11648] LOG:  all server processes terminated; reinitializing
+2022-01-27 09:59:30.623 CET [8552] LOG:  database system was interrupted; last known up at 2022-01-27 09:59:28 CET
+2022-01-27 09:59:31.720 CET [8552] LOG:  database system was not properly shut down; automatic recovery in progress
+2022-01-27 09:59:31.769 CET [8552] LOG:  invalid record length at 0/16CA3F8: wanted 24, got 0
+2022-01-27 09:59:31.769 CET [8552] LOG:  redo is not required
+2022-01-27 09:59:32.015 CET [11648] LOG:  database system is ready to accept connections
+2022-01-27 09:59:54.180 CET [11648] LOG:  checkpointer process (PID 14688) exited with exit code 1
+2022-01-27 09:59:54.181 CET [11648] LOG:  terminating any other active server processes
+2022-01-27 09:59:54.183 CET [13728] WARNING:  terminating connection because of crash of another server process
+2022-01-27 09:59:54.183 CET [13728] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+2022-01-27 09:59:54.183 CET [13728] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+2022-01-27 09:59:54.187 CET [11648] LOG:  all server processes terminated; reinitializing
+2022-01-27 09:59:54.241 CET [2864] LOG:  database system was interrupted; last known up at 2022-01-27 09:59:31 CET
+2022-01-27 09:59:54.591 CET [2864] LOG:  database system was not properly shut down; automatic recovery in progress
+2022-01-27 09:59:54.640 CET [2864] LOG:  redo starts at 0/16CA468
+2022-01-27 09:59:54.640 CET [2864] LOG:  invalid record length at 0/16CA4A0: wanted 24, got 0
+2022-01-27 09:59:54.640 CET [2864] LOG:  redo done at 0/16CA468
+2022-01-27 09:59:54.885 CET [11648] LOG:  database system is ready to accept connections
+2022-01-27 09:59:57.599 CET [11648] LOG:  worker process: logical replication launcher (PID 5876) was terminated by exception 0xC000013A
+2022-01-27 09:59:57.599 CET [11648] HINT:  See C include file "ntstatus.h" for a description of the hexadecimal value.
+2022-01-27 09:59:57.599 CET [11648] LOG:  terminating any other active server processes
+2022-01-27 09:59:57.601 CET [13576] WARNING:  terminating connection because of crash of another server process
+2022-01-27 09:59:57.601 CET [13576] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+2022-01-27 09:59:57.601 CET [13576] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+2022-01-27 09:59:57.603 CET [11648] LOG:  statistics collector process (PID 12020) was terminated by exception 0xC000013A
+2022-01-27 09:59:57.603 CET [11648] HINT:  See C include file "ntstatus.h" for a description of the hexadecimal value.
+2022-01-27 09:59:57.604 CET [11648] LOG:  all server processes terminated; reinitializing
+2022-01-27 09:59:57.655 CET [15272] LOG:  database system was interrupted; last known up at 2022-01-27 09:59:54 CET
+2022-01-27 09:59:57.860 CET [15272] LOG:  database system was not properly shut down; automatic recovery in progress
+2022-01-27 09:59:57.910 CET [15272] LOG:  invalid record length at 0/16CA510: wanted 24, got 0
+2022-01-27 09:59:57.910 CET [15272] LOG:  redo is not required
+2022-01-27 09:59:58.187 CET [11648] LOG:  database system is ready to accept connections

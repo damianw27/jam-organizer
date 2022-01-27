@@ -1,3 +1,12 @@
+## Metoda uruchamiania
+
+Należy uruchomić bazę danych która znajduje się w './database'.
+Po uruchomieniu bazy można przejść do uruchomienia aplikacji.
+Dane do logowania:
+
+#### Login: admin
+#### Hasło: zaq1@WSX
+
 ## Opis aplikacji
 Zaprojektowana aplikacja umożliwia organizowanie I zarządzanie zdarzeniami
 w konwencji rywalizacji. Głównym założeniem było wytworzenie prostego
