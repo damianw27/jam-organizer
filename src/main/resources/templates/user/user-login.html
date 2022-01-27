@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/html">
+
+<!-- /* @thymesVar id="_error" type="java.lang.Boolean" */ -->
+<!-- /* @thymesVar id="_logout" type="java.lang.Boolean" */ -->
+
+<head th:replace="fragments/base-page.html :: baseHead('meetGameDev -- Login Page')"></head>
+
+<body>
+
+<header th:replace="fragments/base-page.html :: header"></header>
+
+<div id="content-section-form">
+    <h1 id="form-title">Sign in to meetGameDev</h1>
+
+    <main id="content">
+        <form method="post" action="/perform_login" style="width: 300px; margin: auto">
+
+            <ul class="fields-container">
+                <li th:replace="fragments/fields.html :: textField('username', 'Username', '', false)"></li>
+                <li th:replace="fragments/fields.html :: passwordField('password', 'Password', '', false)"></li>
+            </ul>
+
+            <div th:if="${_error}" style="color: tomato" role="alert">Bad credentials</div>
+            <div th:if="${_logout}" style="color: #95ff27" role="alert">Successfully logged out</div>
+
+            <div class="btn-group btn-group-right">
+                <a th:replace="fragments/button.html :: linkButtonNormal('Sing up', 'buttonSingUp', '/user/register')"></a>
+                <button th:replace="fragments/button.html :: submitPrimary('Sing in', 'submitSingIn')"></button>
+            </div>
+
+            <a class="form-link" th:href="'/user/forget-pass'">Forget password?</a>
+        </form>
+    </main>
+</div>
+
+<footer th:replace="fragments/base-page.html :: footer"></footer>
+</body>
+
+</html>

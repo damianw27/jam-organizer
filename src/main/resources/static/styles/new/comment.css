@@ -1,0 +1,45 @@
+.comment-list {
+  padding: 1.2em 0;
+  margin: 0;
+  list-style: none;
+  display: block;
+  overflow: hidden;
+}
+
+.comment-container {
+  background-color: #fff;
+  border: 1px solid #c4c4c4;
+  border-radius: 3px;
+  margin: 0.2em 0;
+}
+
+.comment-head {
+  display: flex;
+  flex-direction: row;
+  background-color: #fafafa;
+  border-bottom: 1px solid #c4c4c4;
+  padding: 0.6em;
+  align-items: center;
+}
+
+.comment-author-details {
+  display: flex;
+  flex-direction: column;
+  height: max-content;
+}
+
+.comment-author-link {
+  font-weight: bolder;
+}
+
+.comment-link {
+  font-size: 11px;
+}
+
+.comment-head-fill {
+  flex: 1;
+}
+
+.comment-content {
+  padding: 0 0.6em;
+}

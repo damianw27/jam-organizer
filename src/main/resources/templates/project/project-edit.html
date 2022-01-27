@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- /* @thymesVar id="project" type="pl.wilenskid.jamorganizer.entity.bean.ProjectBean" */ -->
+
+<head th:replace="fragments/base-page.html :: baseHead('meetGameDev -- Project Create')"></head>
+<body>
+
+<header th:replace="fragments/base-page.html :: header"></header>
+
+<div id="content-section-form">
+    <h1 id="form-title">Edit Project</h1>
+
+    <main id="content">
+        <form class="form" th:method="put" th:action="@{/project}">
+
+            <input name="projectId" th:value="${project.getId()}" type="hidden">
+
+            <ul class="fields-container">
+                <li th:replace="fragments/fields.html :: textField('title', 'Title', ${project.getTitle()}, true)"></li>
+                <li th:replace="fragments/fields.html :: descriptionField('description', 'Description', ${project.getDescriptionContent()}, false)"></li>
+            </ul>
+
+            <div class="btn-group btn-group-right">
+                <a th:replace="fragments/button.html :: linkButtonNormal('Cancel', 'buttonCancel', '/project/view?projectId=' + ${project.getId()})"></a>
+                <button th:replace="fragments/button.html :: submitPrimary('Save', 'submitEditProject')"></button>
+            </div>
+
+        </form>
+    </main>
+</div>
+
+<footer th:replace="fragments/base-page.html :: footer"></footer>
+
+</body>
+</html>

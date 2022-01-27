@@ -1,0 +1,13 @@
+package pl.wilenskid.jamorganizer.entity.bean;
+
+import lombok.Builder;
+import lombok.Getter;
+import pl.wilenskid.jamorganizer.enums.ApplicationUserEventRole;
+
+@Getter
+@Builder
+public class MemberCreateBean {
+	private ApplicationUserEventRole applicationUserEventRole;
+    private Long eventId;
+    private Long applicationUserId;
+}

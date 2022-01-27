@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pl"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- /* @thymesVar id="fieldName" type="java.lang.String" */ -->
+<!-- /* @thymesVar id="label" type="java.lang.String" */ -->
+<!-- /* @thymesVar id="value" type="java.lang.String" */ -->
+<!-- /* @thymesVar id="required" type="java.lang.Boolean" */ -->
+<!-- /* @thymesVar id="multiple" type="java.lang.Boolean" */ -->
+<!-- /* @thymesVar id="project" type="pl.wilenskid.jamorganizer.entity.bean.ProjectBean" */ -->
+<!-- /* @thymesVar id="event" type="pl.wilenskid.jamorganizer.entity.bean.EventBean" */ -->
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title></title>
+</head>
+<body>
+<ul>
+    <li class="field-container" th:fragment="textField (fieldName, label, value, required)">
+        <label th:for="${fieldName}">
+            <span th:utext="${required} ? ${label} + ' <span class=\'required\'>*</span>' : ${label}"></span>
+            <input type="text" th:name="${fieldName}" th:id="${fieldName}" th:value="${value}"
+                   th:required="${required}"/>
+        </label>
+    </li>
+
+    <li class="field-container" th:fragment="dateField (fieldName, label, value, required)">
+        <label th:for="${fieldName}">
+            <span th:utext="${required} ? ${label} + ' <span class=\'required\'>*</span>' : ${label}"></span>
+            <input type="date" th:name="${fieldName}" th:id="${fieldName}" th:value="${value}"
+                   th:required="${required}"/>
+        </label>
+    </li>
+
+    <li class="field-container" th:fragment="descriptionField (fieldName, label, value, required)">
+        <label th:for="${fieldName}">
+            <span th:utext="${required} ? ${label} + ' <span class=\'required\'>*</span>' : ${label}"></span>
+            <textarea th:name="${fieldName}" class="rich-editor" th:id="${fieldName}" th:utext="${value}"></textarea>
+        </label>
+    </li>
+
+    <li class="field-container" th:fragment="passwordField (fieldName, label, value, required)">
+        <label th:for="${fieldName}">
+            <span th:utext="${required} ? ${label} + ' <span class=\'required\'>*</span>' : ${label}"></span>
+            <input type="password" th:name="${fieldName}" th:id="${fieldName}" th:value="${value}"
+                   th:required="${required}"/>
+        </label>
+    </li>
+
+    <li class="field-container" th:fragment="emailField (fieldName, label, value, required)">
+        <label th:for="${fieldName}">
+            <span th:utext="${required} ? ${label} + ' <span class=\'required\'>*</span>' : ${label}"></span>
+            <input type="email" th:name="${fieldName}" th:id="${fieldName}" th:value="${value}"
+                   th:required="${required}"/>
+        </label>
+    </li>
+
+    <li class="field-container" th:fragment="fileField (fieldName, label, value, required, multiple)">
+        <label th:for="${fieldName}">
+            <span th:utext="${required} ? ${label} + ' <span class=\'required\'>*</span>' : ${label}"></span>
+            <input type="file" th:name="${fieldName}" th:id="${fieldName}" th:value="${value}" th:required="${required}"
+                   th:multiple="${multiple}"/>
+        </label>
+    </li>
+
+    <li class="field-container" th:fragment="projectSelectField (fieldName, label, projects, required)">
+        <label th:for="${fieldName}">
+            <span th:utext="${required} ? ${label} + ' <span class=\'required\'>*</span>' : ${label}"></span>
+            <input th:name="${fieldName}" th:id="${fieldName}" list="projects" placeholder="Select Project"/>
+            <datalist id="projects">
+                <option th:each="project: ${projects}" th:value="${project.getId()}" th:text="${project.getTitle()}"></option>
+            </datalist>
+        </label>
+    </li>
+
+    <li class="field-container" th:fragment="eventSelectField (fieldName, label, events, required)">
+        <label th:for="${fieldName}">
+            <span th:utext="${required} ? ${label} + ' <span class=\'required\'>*</span>' : ${label}"></span>
+            <input th:name="${fieldName}" th:id="${fieldName}" list="events" placeholder="Select Event"/>
+            <datalist id="events">
+                <option th:each="event: ${events}" th:value="${event.getId()}" th:text="${event.getName()}"></option>
+            </datalist>
+        </label>
+    </li>
+
+    <li class="field-container" th:fragment="imgPreviewField (link)">
+        <img th:src="${link}" alt="img-preview-field" />
+    </li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pl"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title></title>
+</head>
+<body>
+<header id="page-header" th:fragment="header">
+    <link rel="stylesheet" th:href="@{/static/styles/new/header.css}"/>
+    <div id="header-container">
+        <nav id="menu-navigation">
+            <input id="hamburger" type="checkbox"/>
+
+            <div id="hamburger-lines">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <label for="hamburger" id="hamburger-label"></label>
+
+            <ul id="menu-container">
+                <li class="menu-item"><a href="/">meetGameDev</a></li>
+                <li class="menu-item"><a href="/event/view-all">Events</a></li>
+                <li class="menu-item"><a href="/project/view-all">Projects</a></li>
+                <li class="menu-item"><a href="/event/create">Host Event</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+</body>
+</html>

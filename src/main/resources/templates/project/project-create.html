@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/base-page.html :: baseHead('meetGameDev -- Project Create')"></head>
+<body>
+
+<header th:replace="fragments/base-page.html :: header"></header>
+
+<div id="content-section-form">
+    <h1 id="form-title">Create Project</h1>
+
+    <main id="content">
+        <form class="form" method="post" th:action="@{/project}" enctype="multipart/form-data">
+
+            <ul class="fields-container">
+                <li th:replace="fragments/fields.html :: textField('title', 'Title', '', true)"></li>
+                <li th:replace="fragments/fields.html :: descriptionField('description', 'Description', '', false)"></li>
+                <li th:replace="fragments/fields.html :: fileField('logo', 'Logo', '', true, false)"></li>
+                <li th:replace="fragments/fields.html :: fileField('video', 'Video', '', true, false)"></li>
+                <li th:replace="fragments/fields.html :: fileField('project', 'Project', '', true, false)"></li>
+<!--                <li th:replace="fragments/fields.html :: fileField('pictures', 'Photos', '', false, true)"></li>-->
+            </ul>
+
+            <div class="btn-group btn-group-right">
+                <button th:replace="fragments/button.html :: reset('Reset', 'buttonReset')"></button>
+                <button th:replace="fragments/button.html :: submitPrimary('Create Project', 'submitCreateProject')"></button>
+            </div>
+
+        </form>
+    </main>
+</div>
+
+<footer th:replace="fragments/base-page.html :: footer"></footer>
+
+<script>
+    (function () {
+        if (!editors) {
+            return;
+        }
+
+        function onLoad() {
+            document.getElementById("reset-form").addEventListener("click", () => {
+                for (const editor of editors) {
+                    editor.readOnly(true);
+                    editor.setContents("");
+                    editor.readOnly(false);
+                }
+
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', onLoad, false);
+        window.addEventListener('load', onLoad, false );
+    })();
+</script>
+
+</body>
+</html>

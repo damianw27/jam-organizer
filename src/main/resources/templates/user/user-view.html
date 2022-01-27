@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/html">
+
+<!-- /* @thymesVar id="timeService" type="pl.wilenskid.jamorganizer.service.TimeService" */ -->
+<!-- /* @thymesVar id="user" type="pl.wilenskid.jamorganizer.entity.bean.UserBean" */ -->
+
+<head th:replace="fragments/base-page.html :: baseHead('meetGameDev -- View User')"></head>
+<body>
+
+<header th:replace="fragments/base-page.html :: header"></header>
+
+<div id="content-section">
+    <main id="content">
+        <h1 th:text="'User Details: ' + ${user.getDisplayName()}"></h1>
+
+        <table class="tbl">
+            <tbody class="tbl-body">
+            <tr class="tbl-body-row">
+                <td class="tbl-body-cell">Login</td>
+                <td class="tbl-body-cell tbl-body-cell-right"><b th:text="${user.getName()}"></b></td>
+            </tr>
+            <tr class="tbl-body-row">
+                <td class="tbl-body-cell">Email</td>
+                <td class="tbl-body-cell tbl-body-cell-right"><b th:text="${user.getEmail()}"></b></td>
+            </tr>
+            <tr class="tbl-body-row">
+                <td class="tbl-body-cell">Phone number</td>
+                <td class="tbl-body-cell tbl-body-cell-right"><b th:text="${user.getPhoneNumber()}"></b></td>
+            </tr>
+            <tr class="tbl-body-row">
+                <td class="tbl-body-cell">Created</td>
+                <td class="tbl-body-cell tbl-body-cell-right"><b th:text="${user.getCreated()}"></b></td>
+            </tr>
+            <tr class="tbl-body-row">
+                <td class="tbl-body-cell">Job start</td>
+                <td class="tbl-body-cell tbl-body-cell-right"><b th:text="${user.getJobStart()}"></b></td>
+            </tr>
+            </tbody>
+        </table>
+    </main>
+</div>
+
+<footer th:replace="fragments/base-page.html :: footer"></footer>
+
+</body>
+</html>

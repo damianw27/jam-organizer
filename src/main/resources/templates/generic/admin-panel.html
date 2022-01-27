@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/html">
+
+<!-- /* @thymesVar id="reportReasons" type="java.util.List<pl.wilenskid.jamorganizer.entity.bean.ReportReasonBean>" */ -->
+<!-- /* @thymesVar id="reportReason" type="pl.wilenskid.jamorganizer.entity.bean.ReportReasonBean" */ -->
+<!-- /* @thymesVar id="moderators" type="java.util.List<pl.wilenskid.jamorganizer.entity.bean.UserBean>" */ -->
+<!-- /* @thymesVar id="users" type="java.util.List<pl.wilenskid.jamorganizer.entity.bean.UserBean>" */ -->
+<!-- /* @thymesVar id="user" type="pl.wilenskid.jamorganizer.entity.bean.UserBean" */ -->
+<!-- /* @thymesVar id="_focusReportReason" type="java.lang.Boolean" */ -->
+<!-- /* @thymesVar id="_focusAddModerator" type="java.lang.Boolean" */ -->
+
+<head th:replace="fragments/base-page.html :: baseHead('meetGameDev -- Home Page')"></head>
+<body>
+
+<header th:replace="fragments/base-page.html :: header"></header>
+
+<div id="content-section">
+    <main id="content">
+        <h1>Report Reasons</h1>
+
+        <table class="tbl">
+            <thead class="tbl-head">
+            <tr>
+                <th class="tbl-head-cell">Label</th>
+                <th class="tbl-head-cell">Description</th>
+                <th class="tbl-head-cell tbl-head-cell-right">Actions</th>
+            </tr>
+            </thead>
+
+            <tbody class="tbl-body">
+            <tr class="tbl-body-row" th:each="reportReason : ${reportReasons}">
+                <td class="tbl-body-cell" th:text="${reportReason.getLabel()}"></td>
+                <td class="tbl-body-cell" th:text="${reportReason.getDescription()}"></td>
+                <td class="tbl-body-cell tbl-body-cell-right">
+                    <form th:action="'/report-reason/' + ${reportReason.getId()}" th:method="delete">
+                        <button th:replace="fragments/button.html::submitError('Delete', 'buttonDelete' + ${reportReason.getId()})"></button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <form class="inline-form"
+              method="post"
+              th:action="@{/report-reason}">
+            <label for="label"></label>
+            <input th:autofocus="${_focusReportReason}"
+                   class="input-compact"
+                   type="text"
+                   id="label"
+                   name="label"
+                   placeholder="Label"/>
+            <label for="description"></label>
+            <input class="input-compact"
+                   type="text"
+                   id="description"
+                   name="description"
+                   placeholder="Description"/>
+            <button th:replace="fragments/button.html :: submitPrimaryInline('Add Reason', 'submitAddReason')"></button>
+        </form>
+
+        <h1>Moderators</h1>
+
+        <table class="tbl">
+            <tbody class="tbl-body">
+            <tr class="tbl-body-row" th:each="user: ${moderators}">
+                <td class="tbl-body-cell tbl-body-cell-img"
+                    th:utext="'<img height=\'80\' src=' + ${user.getId()} + ' alt=\'Avatar\' />'"></td>
+                <td class="tbl-body-cell">
+                    <a th:text="${user.getDisplayName()}"
+                       th:href="'/user/view?userId=' + ${user.getId()}">
+                    </a>
+                </td>
+                <td class="tbl-body-cell tbl-body-cell-right">
+                    <form th:method="delete" th:action="'/admin/moderator/' + ${user.getId()}">
+                        <button
+                            th:replace="fragments/button.html::submitError('Remove', 'submitRemoveJudge' + ${user.getId()})">
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <form class="inline-form" method="post" th:action="'/admin/moderator'">
+            <label for="userId"></label>
+            <input th:autofocus="${_focusAddModerator}"
+                   class="input-compact"
+                   list="users"
+                   id="userId"
+                   name="userId"
+                   placeholder="Select user"/>
+            <datalist id="users">
+                <option th:each="user : ${users}" th:value="${user.getId()}"
+                        th:text="${user.getDisplayName()}">Dog
+                </option>
+            </datalist>
+            <button th:replace="fragments/button.html :: submitPrimaryInline('Add Moderator', 'submitAddAuthor')"></button>
+        </form>
+
+    </main>
+</div>
+
+<footer th:replace="fragments/base-page.html :: footer"></footer>
+</body>
+</html>

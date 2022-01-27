@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/html">
+
+<!-- /* @thymesVar id="project" type="pl.wilenskid.jamorganizer.entity.bean.ProjectBean" */ -->
+<!-- /* @thymesVar id="authors" type="java.util.List<pl.wilenskid.jamorganizer.entity.User>" */ -->
+<!-- /* @thymesVar id="allUsers" type="java.util.List<pl.wilenskid.jamorganizer.entity.bean.UserBean>" */ -->
+<!-- /* @thymesVar id="commentPageIndexes" type="java.util.List<java.lang.Integer>" */ -->
+<!-- /* @thymesVar id="comments" type="java.util.List<pl.wilenskid.jamorganizer.entity.bean.CommentBean>" */ -->
+<!-- /* @thymesVar id="comment" type="pl.wilenskid.jamorganizer.entity.bean.CommentBean" */ -->
+<!-- /* @thymesVar id="user" type="pl.wilenskid.jamorganizer.entity.User" */ -->
+<!-- /* @thymesVar id="userBean" type="pl.wilenskid.jamorganizer.entity.bean.UserBean" */ -->
+<!-- /* @thymesVar id="_focusAuthorId" type="java.lang.Boolean" */ -->
+<!-- /* @thymesVar id="_commentPageIndex" type="java.lang.String" */ -->
+<!-- /* @thymesVar id="isLoggedUserEndorseProject" type="java.lang.Boolean" */ -->
+
+<head th:replace="fragments/base-page.html :: baseHead('meetGameDev -- Project View')"></head>
+<body>
+
+<header th:replace="fragments/base-page.html :: header"></header>
+
+<div id="content-section">
+    <main id="content">
+        <div class="header-with-action">
+            <h1 th:text="${project.getTitle()}"></h1>
+            <span class="endorsement-text">(❤: <span th:text="${project.getEndorsementCount()}"></span>)</span>
+            <div class="btn-group btn-group-right">
+                <th:block th:switch="${isLoggedUserEndorseProject}">
+                    <th:block th:case="${false}">
+                        <a th:replace="fragments/button.html::linkButtonNormal('❤', 'buttonEndorse', '/endorsement/endorse/' + ${project.getId()})"></a>
+                    </th:block>
+
+                    <th:block th:case="${true}">
+                        <a th:replace="fragments/button.html::linkButtonPrimary('❤', 'buttonUnEndorse', '/endorsement/un-endorse/' + ${project.getId()})"></a>
+                    </th:block>
+                </th:block>
+
+                <a th:replace="fragments/button.html::linkButtonNormal('Report', 'buttonReport', '/project/report?projectId=' + ${project.getId()})"></a>
+                <a th:replace="fragments/button.html::linkButtonNormal('Edit', 'buttonEdit', '/project/edit?projectId=' + ${project.getId()})"></a>
+                <a th:replace="fragments/button.html::linkButtonError('Delete', 'buttonDelete', '/project/delete?projectId=' + ${project.getId()})"></a>
+            </div>
+        </div>
+
+        <h3>Description</h3>
+
+        <video width="100%" controls style="margin: auto; display: block;">
+            <source th:src="${project.getVideoLink()}" type="video/webm">
+        </video>
+
+        <div id="project-desc" th:utext="${project.getDescriptionContent()}"></div>
+
+        <h3>Authors</h3>
+
+        <table class="tbl">
+            <tbody class="tbl-body">
+            <tr class="tbl-body-row" th:each="user: ${authors}">
+                <td class="tbl-body-cell tbl-body-cell-img"
+                    th:utext="'<img height=\'80\' src=' + ${user.getAvatarUrl()} + ' alt=\'Avatar\' />'"></td>
+                <td class="tbl-body-cell">
+                    <a th:text="${user.getDisplayName()}"
+                       th:href="@{/user/view?userId={id}(id=*{user.getId()})}">
+                    </a>
+                </td>
+                <td class="tbl-body-cell tbl-body-cell-right">
+                    <form th:method="delete"
+                          th:action="@{/project/author/remove/{projectId}/{userId}(projectId=*{project.getId()}, userId=*{user.getId()})}">
+                        <button th:replace="fragments/button.html::submitError('Remove Author', 'submitRemoveAuthor')">
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <form class="inline-form" method="post" th:action="@{/project/author/{id}(id=*{project.getId()})}">
+            <label for="authorId"></label>
+            <input th:autofocus="${_focusAuthorId}" class="input-compact" list="users" id="authorId" name="authorId"
+                   placeholder="Select user"/>
+            <datalist id="users">
+                <option th:each="userBean : ${allUsers}" th:value="${userBean.getId()}"
+                        th:text="${userBean.getDisplayName()}">Dog
+                </option>
+            </datalist>
+            <button th:replace="fragments/button.html :: submitPrimaryInline('Add Author', 'submitAddAuthor')"></button>
+        </form>
+
+        <h3>Comments</h3>
+        <form method="post" action="/comment">
+            <label for="commentContent">
+                <textarea name="commentContent" class="simple-editor" id="commentContent"></textarea>
+            </label>
+
+            <input name="referenceId" th:value="${project.getId()}" type="hidden"/>
+            <input name="referenceType" th:value="PROJECT" type="hidden"/>
+
+            <div class="btn-group btn-group-right">
+                <button th:replace="fragments/button.html::submitPrimary('Comment', 'buttonComment')"></button>
+            </div>
+
+        </form>
+
+        <ul class="comment-list">
+            <li
+                class="comment-container"
+                th:each="comment : ${comments}"
+            >
+                <div class="comment-head">
+                    <div class="comment-author-details">
+                        <a
+                            class="comment-author-link"
+                            th:href="'/user/view?userId=' + ${comment.getAuthor().getId()}"
+                            th:text="${comment.getAuthor().getDisplayName()}"
+                        >
+                        </a>
+                        <a
+                            class="comment-link"
+                            th:href="'/project/view?projectId=' + ${project.getId()} + '&selectedCommentId=' + ${comment.getId()}"
+                            th:text="'(' + ${comment.getCreated()} + ')'"
+                        >
+                        </a>
+                    </div>
+                    <div class="comment-head-fill"></div>
+                    <div class="btn-group btn-group-slim btn-group-right">
+                        <a th:replace="fragments/button.html::linkButtonNormalSlim('Report', '', '/comment/report?commentId=' + ${comment.getId()})"></a>
+                        <a th:replace="fragments/button.html::linkButtonNormalSlim('Edit', '', '/comment/edit?commentId=' + ${comment.getId()})"></a>
+                        <a th:replace="fragments/button.html::linkButtonNormalSlim('Delete', '', '/comment/delete?commentId=' + ${comment.getId()})"></a>
+                    </div>
+                </div>
+                <div
+                    class="comment-content"
+                    th:utext="${comment.getCommentContent().getContent()}"
+                >
+                </div>
+            </li>
+        </ul>
+
+        <div class="btn-group btn-group-slim btn-group-center">
+            <a th:each="index : ${commentPageIndexes}"
+               th:class="'a-btn a-btn-slim btn'"
+               th:classappend="${index.toString() == _commentPageIndex ? 'btn-primary' : ''}"
+               th:text="${index + 1}"
+               th:href="'/project/view?projectId=' + ${project.getId()} + '&commentPageIndex=' + ${index}"
+            ></a>
+        </div>
+    </main>
+</div>
+
+<footer th:replace="fragments/base-page.html :: footer"></footer>
+
+</body>
+</html>

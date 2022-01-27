@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pl"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- /* @thymesVar id="user" type="pl.wilenskid.jamorganizer.entity.bean.UserBean" */ -->
+
+<head th:replace="fragments/base-page.html :: baseHead('meetGameDev -- Edit User')"></head>
+<body>
+
+<header th:replace="fragments/base-page.html :: header"></header>
+
+<div id="content-section-form">
+    <h1 id="form-title">Edit User</h1>
+
+    <main id="content">
+        <form class="form" method="post" th:action="@{/app-user}">
+
+            <ul class="fields-container">
+                <li th:replace="fragments/fields.html :: textField('name', 'Name', ${user.getName()}, true)"></li>
+                <li th:replace="fragments/fields.html :: textField('displayName', 'Display Name', ${user.getDisplayName()}, false)"></li>
+                <li th:replace="fragments/fields.html :: emailField('email', 'Email', ${user.getEmail()}, true)"></li>
+                <li th:replace="fragments/fields.html :: textField('phoneNumber', 'Phone Number', ${user.getPhoneNumber()}, false)"></li>
+            </ul>
+
+            <div class="btn-group btn-group-right">
+                <button th:replace="fragments/button.html :: reset('Reset', 'buttonReset')"></button>
+                <button th:replace="fragments/button.html :: submitPrimary('Create User', 'submitCreateUser')"></button>
+            </div>
+
+        </form>
+</div>
+</div>
+
+<footer th:replace="fragments/base-page.html :: footer"></footer>
+
+</body>
+</html>

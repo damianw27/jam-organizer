@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/html">
+
+<head th:replace="fragments/base-page.html :: baseHead('meetGameDev -- Forget Password')"></head>
+<body>
+
+<header th:replace="fragments/base-page.html :: header"></header>
+
+<div id="content-section-form">
+    <h1 id="form-title">Reset your password</h1>
+
+    <main id="content">
+        <form method="post" action="/perform_login" style="width: 300px; margin: auto">
+            <p>Enter your user account email address, and we will send you a password reset link.</p>
+
+            <ul class="fields-container">
+                <li th:replace="fragments/fields.html :: textField('email', 'Email', '', false)"></li>
+            </ul>
+
+            <div class="btn-group btn-group-right">
+                <a th:replace="fragments/button.html :: linkButtonNormal('Cancel', 'buttonCancel', '/user/login')"></a>
+                <button th:replace="fragments/button.html :: submitPrimary('Reset Password', 'submitResetPassword')"></button>
+            </div>
+        </form>
+    </main>
+</div>
+
+<footer th:replace="fragments/base-page.html :: footer"></footer>
+
+</body>
+</html>

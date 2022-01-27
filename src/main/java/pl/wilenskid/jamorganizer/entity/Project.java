@@ -17,10 +17,11 @@ import java.util.Set;
 @Entity(name = "PROJECT")
 public class Project extends AbstractPersistable<Long> {
     private String title;
-    private String descriptionLink;
-    private String logoLink;
-    private String videoLink;
-    private String downloadLink;
+    private Long descriptionFileId;
+    private Long logoFileId;
+    private Long picturesFilesGroupId;
+    private Long videoFileId;
+    private Long projectFileId;
 
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
@@ -28,8 +29,14 @@ public class Project extends AbstractPersistable<Long> {
         joinColumns = { @JoinColumn(name = "PROJECT_ID") },
         inverseJoinColumns = { @JoinColumn(name = "USER_ID") }
     )
-    private Set<ApplicationUser> members;
+    private Set<User> members;
 
     @OneToMany(mappedBy = "project")
     private Set<Submission> submissions;
+
+    @OneToMany
+    private Set<Endorsement> endorsements;
+
+    @ManyToMany
+    private Set<Event> winedEvents;
 }

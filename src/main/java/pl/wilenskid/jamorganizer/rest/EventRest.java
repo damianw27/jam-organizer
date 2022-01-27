@@ -1,10 +1,16 @@
 package pl.wilenskid.jamorganizer.rest;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpStatusCodeException;
-import pl.wilenskid.jamorganizer.bean.EventCreateBean;
+import pl.wilenskid.jamorganizer.builder.RedirectionPath;
+import pl.wilenskid.jamorganizer.entity.bean.AddJudgeBean;
+import pl.wilenskid.jamorganizer.entity.bean.AddOrganizerBean;
+import pl.wilenskid.jamorganizer.entity.bean.EventCreateBean;
 import pl.wilenskid.jamorganizer.entity.Event;
+import pl.wilenskid.jamorganizer.entity.bean.EventUpdateBean;
+import pl.wilenskid.jamorganizer.enums.ApplicationUserEventRole;
+import pl.wilenskid.jamorganizer.exception.NotFoundRestException;
 import pl.wilenskid.jamorganizer.exception.NotModifiedRestException;
 import pl.wilenskid.jamorganizer.service.EventService;
 
@@ -14,7 +20,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/event")
-public class EventRest implements CrudRest<EventCreateBean, Object> {
+public class EventRest implements CrudRest<EventCreateBean, EventUpdateBean> {
 
     public final EventService eventService;
 
@@ -30,8 +36,9 @@ public class EventRest implements CrudRest<EventCreateBean, Object> {
     }
 
     @Override
-    public String update(Object o, HttpServletResponse response) throws HttpStatusCodeException {
-        return "redirect:/home";
+    public String update(EventUpdateBean eventUpdateBean, HttpServletResponse response) throws HttpStatusCodeException {
+        eventService.update(eventUpdateBean);
+        return "redirect:/event/view?eventId=" + eventUpdateBean.getEventId();
     }
 
     @Override
@@ -43,6 +50,49 @@ public class EventRest implements CrudRest<EventCreateBean, Object> {
         }
 
         return "redirect:/home";
+    }
+
+    @PostMapping("/organizer/{eventId}")
+    public String addOrganizer(@PathVariable("eventId") Long eventId, AddOrganizerBean addAuthorBean) {
+        eventService.addMemberToEvent(eventId, addAuthorBean.getOrganizerId(), ApplicationUserEventRole.ORGANIZER);
+        return "redirect:/event/view?eventId=" + eventId + "&focusOrganizerId=true";
+    }
+
+    @DeleteMapping("/organizer/remove/{eventId}/{userId}")
+    public String removeAuthor(@PathVariable("eventId") Long eventId,
+                               @PathVariable("userId") Long userId) {
+        eventService.removeMemberFromEvent(eventId, userId);
+        return "redirect:/event/view?eventId=" + eventId + "&focusOrganizerId=true";
+    }
+
+    @PostMapping("/judge/{eventId}")
+    public String addJudge(@PathVariable("eventId") Long eventId, AddJudgeBean addAuthorBean) {
+        eventService.addMemberToEvent(eventId, addAuthorBean.getJudgeId(), ApplicationUserEventRole.JUDGE);
+        return "redirect:/event/view?eventId=" + eventId + "&focusJudgeId=true";
+    }
+
+    @DeleteMapping("/judge/remove/{eventId}/{userId}")
+    public String removeJudge(@PathVariable("eventId") Long eventId,
+                              @PathVariable("userId") Long userId) {
+        eventService.removeMemberFromEvent(eventId, userId);
+        return "redirect:/event/view?eventId=" + eventId + "&focusJudgeId=true";
+    }
+
+    @PutMapping("/find-winners/{eventId}")
+    public String findWinners(@PathVariable("eventId") Long eventId) {
+        Event event = eventService
+            .getById(eventId)
+            .orElseThrow(NotFoundRestException::new);
+
+        if (eventService.hasLoggedInUserRoleInEvent(event, ApplicationUserEventRole.ORGANIZER)) {
+            eventService.findWinner(event);
+        }
+
+        return RedirectionPath
+            .builder()
+            .basePath("/event/view")
+            .withParam("eventId", String.valueOf(event.getId()))
+            .build();
     }
 
 }

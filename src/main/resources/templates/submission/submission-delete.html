@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pl"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+
+<head th:replace="fragments/base-page.html :: baseHead('meetGameDev -- Delete Submission')"></head>
+
+<body>
+
+<header th:replace="fragments/base-page.html :: header"></header>
+
+<div id="content-section-form">
+    <h1 id="form-title">Delete Submission</h1>
+
+    <main id="content">
+        <form class="form" th:method="delete" th:action="@{/submission}">
+            <p>Are you sure you want to delete project <strong>{project_name}</strong> submission from event <strong>{event_name}</strong>
+            </p>
+
+            <p>All grades from judges will be lost, and you will be unable to win this event!</p>
+
+            <div class="btn-group btn-group-right">
+                <a th:replace="fragments/button.html::linkButtonNormal('Cancel', 'buttonCancel', '/submission/view?eventId=1')"></a>
+                <button th:replace="fragments/button.html::submitError('Delete', 'buttonDelete')"></button>
+            </div>
+        </form>
+    </main>
+</div>
+
+<footer th:replace="fragments/base-page.html :: footer"></footer>
+
+</body>
+</html>

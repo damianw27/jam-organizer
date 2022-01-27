@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pl"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- /* @thymesVar id="validationErrors" type="java.util.List<java.lang.Integer>" */ -->
+
+<head th:replace="fragments/base-page.html :: baseHead('meetGameDev -- Create User')"></head>
+
+<body>
+
+<header th:replace="fragments/base-page.html :: header"></header>
+
+<div id="content-section-form">
+    <h1 id="form-title">Create User</h1>
+
+    <main id="content">
+        <form class="form" method="post" th:action="@{/user/register}">
+
+            <ul class="fields-container">
+                <li th:replace="fragments/fields.html :: textField('name', 'Name', '', true)"></li>
+                <li th:replace="fragments/fields.html :: textField('displayName', 'Display Name', '', true)"></li>
+                <li th:replace="fragments/fields.html :: passwordField('password', 'Password', '', true)"></li>
+                <li th:replace="fragments/fields.html :: passwordField('rePassword', 'Re-Password', '', true)"></li>
+                <li th:replace="fragments/fields.html :: emailField('email', 'Email', '', true)"></li>
+                <li th:replace="fragments/fields.html :: textField('phoneNumber', 'Phone Number', '', false)"></li>
+            </ul>
+
+            <div th:if="${!validationErrors.isEmpty()}" class="error-section">
+                Found following errors in last request:
+
+                <ul>
+                    <li th:if="${validationErrors.contains(101)}">Username taken</li>
+                    <li th:if="${validationErrors.contains(102)}">Username invalid</li>
+                    <li th:if="${validationErrors.contains(103)}">Password to weak</li>
+                    <li th:if="${validationErrors.contains(104)}">Passwords are not the same</li>
+                </ul>
+            </div>
+
+
+            <div class="btn-group btn-group-right">
+                <button th:replace="fragments/button.html :: reset('Reset', 'buttonReset')"></button>
+                <button th:replace="fragments/button.html :: submitPrimary('Create User', 'submitCreateUser')"></button>
+            </div>
+
+        </form>
+    </main>
+</div>
+
+<footer th:replace="fragments/base-page.html :: footer"></footer>
+
+</body>
+</html>

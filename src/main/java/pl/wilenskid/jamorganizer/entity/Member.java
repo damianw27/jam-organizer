@@ -21,5 +21,5 @@ public class Member extends AbstractPersistable<Long> {
 
     @ManyToOne
     @JoinColumn(name="APPLICATION_USER_ID", nullable=false)
-    private ApplicationUser applicationUser;
+    private User user;
 }

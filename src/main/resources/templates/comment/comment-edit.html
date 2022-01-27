@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- /* @thymesVar id="comment" type="pl.wilenskid.jamorganizer.entity.bean.CommentBean" */ -->
+<!-- /* @thymesVar id="reportReasons" type="java.util.List<pl.wilenskid.jamorganizer.entity.bean.ReportReasonBean>" */ -->
+<!-- /* @thymesVar id="reportReason" type="pl.wilenskid.jamorganizer.entity.bean.ReportReasonBean" */ -->
+
+<head th:replace="fragments/base-page.html::baseHead('meetGameDev -- Edit Comment')"></head>
+<body>
+
+<header th:replace="fragments/base-page.html::header"></header>
+
+<div id="content-section-form">
+    <h1 id="form-title">Edit Comment</h1>
+
+    <main id="content">
+
+        <form class="form" th:method="put" th:action="@{/comment}">
+            <label for="commentContent">
+                <textarea name="commentContent"
+                          class="simple-editor"
+                          id="commentContent"
+                          th:utext="${comment.getCommentContent().getContent()}">
+                </textarea>
+            </label>
+
+            <input name="commentId" th:value="${comment.getId()}" type="hidden"/>
+
+            <div class="btn-group btn-group-right">
+                <button th:replace="fragments/button.html::submitPrimary('Save', 'buttonSave')"></button>
+            </div>
+        </form>
+    </main>
+</div>
+
+<footer th:replace="fragments/base-page.html::footer"></footer>
+
+</body>
+</html>

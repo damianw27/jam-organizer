@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/html">
+
+<!-- /* @thymesVar id="events" type="java.util.List<pl.wilenskid.jamorganizer.entity.bean.EventBean>" */ -->
+<!-- /* @thymesVar id="myEvents" type="java.util.List<pl.wilenskid.jamorganizer.entity.bean.EventBean>" */ -->
+<!-- /* @thymesVar id="eventsPageIndexes" type="java.util.List<java.lang.Integer>" */ -->
+<!-- /* @thymesVar id="myEventsPageIndexes" type="java.util.List<java.lang.Integer>" */ -->
+<!-- /* @thymesVar id="event" type="pl.wilenskid.jamorganizer.entity.bean.EventBean" */ -->
+<!-- /* @thymesVar id="_eventsPageIndex" type="java.lang.Integer" */ -->
+<!-- /* @thymesVar id="_myEventsPageIndex" type="java.lang.Integer" */ -->
+
+<head th:replace="fragments/base-page.html :: baseHead('meetGameDev -- View Events')"></head>
+<body>
+
+<header th:replace="fragments/base-page.html :: header"></header>
+
+<div id="content-section">
+    <main id="content">
+        <th:block th:if="${myEvents != null && myEvents.size() != 0}">
+            <h1>My Events</h1>
+
+            <table class="tbl">
+                <thead class="tbl-head">
+                <tr>
+                    <th class="tbl-head-cell">Logo</th>
+                    <th class="tbl-head-cell">Name</th>
+                    <th class="tbl-head-cell tbl-head-cell-right">Actions</th>
+                </tr>
+                </thead>
+
+                <tbody class="tbl-body">
+                <tr class="tbl-body-row" th:each="event : ${myEvents}">
+                    <td class="tbl-body-cell"
+                        th:utext="'<img height=\'80\' src=' + ${event.getLogoLink()} + ' alt=\'Event Logo\' />'"></td>
+                    <td class="tbl-body-cell" th:text="${event.getName()}"></td>
+                    <td class="tbl-body-cell tbl-body-cell-right">
+                        <a th:replace="fragments/button.html :: linkButtonNormal('View', 'buttonView' + ${event.getId()}, '/event/view?eventId=' + ${event.getId()})"></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div class="btn-group btn-group-slim btn-group-center">
+                <a th:each="index : ${myEventsPageIndexes}"
+                   th:class="'a-btn a-btn-slim btn'"
+                   th:classappend="${index.toString() == _myEventsPageIndex ? 'btn-primary' : ''}"
+                   th:text="${index + 1}"
+                   th:href="'/event/view-all?myEventsPageIndex=' + ${index}"
+                ></a>
+            </div>
+        </th:block>
+
+        <h1>All Events</h1>
+
+        <table class="tbl">
+            <thead class="tbl-head">
+            <tr>
+                <th class="tbl-head-cell">Logo</th>
+                <th class="tbl-head-cell">Name</th>
+                <th class="tbl-head-cell tbl-head-cell-right">Actions</th>
+            </tr>
+            </thead>
+
+            <tbody class="tbl-body">
+            <tr class="tbl-body-row" th:each="event : ${events}">
+                <td class="tbl-body-cell"
+                    th:utext="'<img height=\'80\' src=' + ${event.getLogoLink()} + ' alt=\'Event Logo\' />'"></td>
+                <td class="tbl-body-cell" th:text="${event.getName()}"></td>
+                <td class="tbl-body-cell tbl-body-cell-right">
+                    <a th:replace="fragments/button.html :: linkButtonNormal('View', 'buttonView' + ${event.getId()}, '/event/view?eventId=' + ${event.getId()})"></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="btn-group btn-group-slim btn-group-center">
+            <a th:each="index : ${eventsPageIndexes}"
+               th:class="'a-btn a-btn-slim btn'"
+               th:classappend="${index.toString() == _eventsPageIndex ? 'btn-primary' : ''}"
+               th:text="${index + 1}"
+               th:href="'/event/view-all?eventsPageIndex=' + ${index}"
+            ></a>
+        </div>
+
+    </main>
+</div>
+
+<footer th:replace="fragments/base-page.html :: footer"></footer>
+
+</body>
+</html>

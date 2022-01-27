@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- /* @thymesVar id="comment" type="pl.wilenskid.jamorganizer.entity.bean.CommentBean" */ -->
+
+<head th:replace="fragments/base-page.html::baseHead('meetGameDev -- Delete Comment')"></head>
+<body>
+
+<header th:replace="fragments/base-page.html::header"></header>
+
+<div id="content-section-form">
+    <h1 id="form-title">Edit Comment</h1>
+
+    <main id="content">
+
+        <form class="form" th:method="delete" th:action="'/comment/' + ${comment.getId()}">
+            <p>Are you sure you want to delete following comment:</p>
+
+            <div class="comment-container">
+                <div class="comment-head">
+                    <div class="comment-author-details">
+                        <a
+                            class="comment-author-link"
+                            th:href="'/user/view?userId=' + ${comment.getAuthor().getId()}"
+                            th:text="${comment.getAuthor().getDisplayName()}"
+                        >
+                        </a>
+                        <span
+                            class="comment-link"
+                            th:text="'(' + ${comment.getCreated()} + ')'"
+                        >
+                    </span>
+                    </div>
+                    <div class="btn-group btn-group-right">
+                    </div>
+                </div>
+                <div
+                    class="comment-content"
+                    th:utext="${comment.getCommentContent().getContent()}"
+                >
+                </div>
+            </div>
+
+            <div class="btn-group btn-group-right">
+                <button th:replace="fragments/button.html::submitPrimary('Delete', 'buttonDelete')"></button>
+            </div>
+        </form>
+    </main>
+</div>
+
+<footer th:replace="fragments/base-page.html::footer"></footer>
+
+</body>
+</html>

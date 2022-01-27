@@ -1,0 +1,43 @@
+.tbl {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.tbl-head {
+  border-bottom: 2px solid #ccc;
+  color: #777;
+  text-align: left;
+}
+
+.tbl-head-cell {
+  padding: 20px 0 10px 0;
+}
+
+.tbl-head-cell-right {
+  text-align: right;
+}
+
+.tbl-body .tbl-body-row:last-child {
+  border-style: none;
+}
+
+.tbl-body-row {
+  border-bottom: 1px dashed #ccc;
+  padding: 10px 0;
+  width: max-content;
+}
+
+.tbl-body-cell {
+  padding: 10px 0;
+  height: fit-content;
+}
+
+.tbl-body-cell-right {
+  text-align: right;
+}
+
+.tbl-body-cell-img {
+  width: 130px;
+  text-align: center;
+}

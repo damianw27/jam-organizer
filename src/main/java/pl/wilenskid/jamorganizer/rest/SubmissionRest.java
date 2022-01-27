@@ -3,7 +3,7 @@ package pl.wilenskid.jamorganizer.rest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.HttpStatusCodeException;
-import pl.wilenskid.jamorganizer.bean.SubmissionCreateBean;
+import pl.wilenskid.jamorganizer.entity.bean.SubmissionCreateBean;
 import pl.wilenskid.jamorganizer.entity.Submission;
 import pl.wilenskid.jamorganizer.exception.NotModifiedRestException;
 import pl.wilenskid.jamorganizer.service.SubmissionService;

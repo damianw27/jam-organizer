@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- /* @thymesVar id="label" type="java.lang.String" */ -->
+<!-- /* @thymesVar id="link" type="java.lang.String" */ -->
+<!-- /* @thymesVar id="disabled" type="java.lang.Boolean" */ -->
+
+<body>
+
+<button th:fragment="submitPrimary(label, name)"
+        th:name="${name}"
+        th:id="${name}"
+        th:text="${label}"
+        type="submit"
+        class="btn btn-primary"
+>
+</button>
+
+<button th:fragment="submitPrimaryInline(label, name)"
+        th:name="${name}"
+        th:id="${name}"
+        th:text="${label}"
+        type="submit"
+        class="btn btn-primary btn-inline-form"
+>
+</button>
+
+<button th:fragment="submitWarning(label, name)"
+        th:name="${name}"
+        th:id="${name}"
+        th:text="${label}"
+        type="submit"
+        class="btn btn-warning"
+>
+</button>
+
+<button th:fragment="submitError(label, name)"
+        th:name="${name}"
+        th:id="${name}"
+        th:text="${label}"
+        type="submit"
+        class="btn btn-error"
+>
+</button>
+
+<button th:fragment="buttonPrimary(label, name)"
+        type="button"
+        th:name="${name}"
+        th:id="${name}"
+        th:text="${label}"
+        class="btn btn-primary"
+>
+</button>
+
+<button th:fragment="buttonWarning(label, name)"
+        th:name="${name}"
+        th:id="${name}"
+        th:text="${label}"
+        type="button"
+        class="btn btn-warning"
+>
+</button>
+
+<button th:fragment="buttonError(label, name)"
+        th:name="${name}"
+        th:id="${name}"
+        th:text="${label}"
+        type="button"
+        class="btn btn-error"
+>
+</button>
+
+<button th:fragment="buttonNormal(label, name)"
+        th:name="${name}"
+        th:id="${name}"
+        th:text="${label}"
+        type="button"
+        class="btn"
+>
+</button>
+
+<button th:fragment="reset(label, name)"
+        th:name="${name}"
+        th:id="${name}"
+        th:text="${label}"
+        type="reset"
+        class="btn"
+>
+</button>
+
+<a th:fragment="linkButtonPrimary(label, name, link)"
+   th:text="${label}"
+   th:name="${name}"
+   th:id="${name}"
+   th:href="${link}"
+   class="a-btn btn btn-primary"
+>
+</a>
+
+<a th:fragment="linkButtonWarning(label, name,  link)"
+   th:text="${label}"
+   th:name="${name}"
+   th:id="${name}"
+   th:href="${link}"
+   class="a-btn btn btn-warning"
+>
+</a>
+
+<a th:fragment="linkButtonError(label, name,  link)"
+   th:text="${label}"
+   th:name="${name}"
+   th:id="${name}"
+   th:href="${link}"
+   class="a-btn btn btn-error"
+>
+</a>
+
+<a th:fragment="linkButtonNormal(label, name,  link)"
+   th:text="${label}"
+   th:name="${name}"
+   th:id="${name}"
+   th:href="${link}"
+   class="a-btn btn"
+>
+</a>
+
+<a th:fragment="linkButtonNormalSlim(label, name,  link)"
+   th:text="${label}"
+   th:name="${name}"
+   th:id="${name}"
+   th:href="${link}"
+   class="a-btn a-btn-slim btn"
+>
+</a>
+
+</body>
+
+</html>

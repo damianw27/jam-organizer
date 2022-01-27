@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- /* @thymesVar id="submission" type="pl.wilenskid.jamorganizer.entity.Submission" */ -->
+<!-- /* @thymesVar id="project" type="pl.wilenskid.jamorganizer.entity.Project" */ -->
+<!-- /* @thymesVar id="event" type="pl.wilenskid.jamorganizer.entity.Event" */ -->
+<!-- /* @thymesVar id="criteria" type="java.util.List<pl.wilenskid.jamorganizer.entity.Criterion>" */ -->
+<!-- /* @thymesVar id="criterion" type="pl.wilenskid.jamorganizer.entity.Criterion" */ -->
+<!-- /* @thymesVar id="grades" type="java.util.List<pl.wilenskid.jamorganizer.entity.Grade>" */ -->
+<!-- /* @thymesVar id="grade" type="pl.wilenskid.jamorganizer.entity.Grade" */ -->
+<!-- /* @thymesVar id="isLoggedUserJudge" type="java.lang.Boolean" */ -->
+<!-- /* @thymesVar id="_focusCriterionId" type="java.lang.Boolean" */ -->
+
+<head th:replace="fragments/base-page.html :: baseHead('meetGameDev -- Project View')"></head>
+<body>
+
+<header th:replace="fragments/base-page.html :: header"></header>
+
+<div id="content-section">
+    <main id="content">
+        <h1>Submission View</h1>
+
+        <h2>Details</h2>
+        <table class="tbl">
+            <tbody class="tbl-body">
+            <tr class="tbl-body-row">
+                <td class="tbl-body-cell">
+                    <b th:text="${submission.getProject().getTitle()}"></b>
+                </td>
+                <td class="tbl-body-cell tbl-body-cell-right">
+                    <a th:replace="fragments/button.html::linkButtonPrimary('View', 'viewProject', '/project/view?projectId=' + ${submission.getProject().getId()})"></a>
+                </td>
+            </tr>
+            <tr class="tbl-body-row">
+                <td class="tbl-body-cell">
+                    <b th:text="${submission.getEvent().getName()}"></b>
+                </td>
+                <td class="tbl-body-cell tbl-body-cell-right">
+                    <a th:replace="fragments/button.html::linkButtonPrimary('View', 'viewEvent', '/event/view?eventId=' + ${submission.getEvent().getId()})"></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <h2>Grades</h2>
+
+        <table class="tbl">
+            <thead class="tbl-head">
+            <tr>
+                <th class="tbl-head-cell">Criterion</th>
+                <th class="tbl-head-cell">Priority</th>
+                <th class="tbl-head-cell">Grade</th>
+                <th class="tbl-head-cell tbl-head-cell-right">Judge</th>
+
+            </tr>
+            </thead>
+            <tbody class="tbl-body">
+            <tr class="tbl-body-row" th:each="grade : ${grades}">
+                <td class="tbl-body-cell" th:text="${grade.getCriterion().getLabel()}"></td>
+                <td class="tbl-body-cell" th:text="${grade.getCriterion().getPriority()}"></td>
+                <td class="tbl-body-cell" th:text="${grade.getGrade()}"></td>
+                <td class="tbl-body-cell tbl-body-cell-right">
+                    <a th:text="${grade.getJudge().getUser().getDisplayName()}"
+                       th:href="'/user/view?userId=' + ${grade.getJudge().getUser().getId()}">
+
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <form th:if="${isLoggedUserJudge}"
+              class="inline-form"
+              method="post"
+              th:action="@{/grade}">
+            <label for="criterionId"></label>
+            <input th:autofocus="${_focusCriterionId}"
+                   class="input-compact"
+                   list="criteria"
+                   id="criterionId"
+                   name="criterionId"
+                   placeholder="Select criterion"/>
+            <label for="grade"></label>
+            <input class="input-compact"
+                   type="number"
+                   id="grade"
+                   name="grade"
+                   placeholder="Value between 1 and 10"/>
+            <input type="hidden"
+                   name="submissionId"
+                   th:value="${submission.getId()}">
+            <datalist id="criteria">
+                <option th:each="criterion : ${criteria}"
+                        th:value="${criterion.getId()}"
+                        th:text="${criterion.getLabel()}">
+                </option>
+            </datalist>
+            <button th:replace="fragments/button.html :: submitPrimaryInline('Add Grade', 'submitAddGrade')">
+            </button>
+        </form>
+
+    </main>
+</div>
+
+</body>
+</html>

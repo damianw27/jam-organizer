@@ -1,0 +1,25 @@
+:root {
+  --button-normal: #ccc5;
+  --button-normal-text: #335;
+  --button-normal-hover: #aaa5;
+  --button-normal-focus: #ddd5;
+  --button-primary: #4676D7;
+  --button-primary-text: #e3e3ff;
+  --button-primary-hover: #1d49aa;
+  --button-primary-focus: #cbd6ee;
+  --button-warning: #ffb10a;
+  --button-warning-text: #382703;
+  --button-warning-hover: #ffc950;
+  --button-warning-focus: #ffeba6;
+  --button-error: #da0000;
+  --button-error-text: #ffd1d1;
+  --button-error-hover: #d93b3b;
+  --button-error-focus: #ffd6d6;
+  --body-background: #252525;
+  --body-text-color: #efefef;
+  --content-background: #efefef;
+  --content-text-color: #252525;
+  --content-form-border-color: #e1e1e1;
+  --header-bg-color: #343434;
+  --header-border-color: #424242;
+}

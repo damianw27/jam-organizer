@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- /* @thymesVar id="title" type="java.lang.String" */ -->
+
+<head th:fragment="baseHead(title)">
+    <!-- title -->
+    <title th:text="${title}"></title>
+
+    <!-- meta -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="true" name="HandheldFriendly">
+
+    <!-- links -->
+    <link rel="stylesheet" th:href="@{/static/styles/new/colors.css}"/>
+    <link rel="stylesheet" th:href="@{/static/styles/new/core.css}"/>
+    <link rel="stylesheet" th:href="@{/static/styles/new/button.css}"/>
+    <link rel="stylesheet" th:href="@{/static/styles/new/inputs.css}"/>
+    <link rel="stylesheet" th:href="@{/static/styles/new/header.css}"/>
+    <link rel="stylesheet" th:href="@{/static/styles/new/footer.css}"/>
+    <link rel="stylesheet" th:href="@{/static/styles/new/layout.css}"/>
+    <link rel="stylesheet" th:href="@{/static/styles/new/table.css}"/>
+    <link rel="stylesheet" th:href="@{/static/styles/new/comment.css}"/>
+    <link rel="stylesheet" th:href="@{/static/js-lib/trumbowyg/ui/trumbowyg.min.css}"/>
+    <link rel="stylesheet" th:href="@{/static/js-lib/trumbowyg/plugins/colors/ui/trumbowyg.colors.min.css}">
+    <link rel="stylesheet" th:href="@{/static/js-lib/trumbowyg/plugins/emoji/ui/trumbowyg.emoji.min.css}">
+    <link rel="stylesheet" th:href="@{/static/js-lib/trumbowyg/plugins/giphy/ui/trumbowyg.giphy.min.css}">
+
+    <!-- scripts -->
+    <script defer th:src="@{/static/js-lib/jquery.min.js}"></script>
+    <script defer th:src="@{/static/js-lib/trumbowyg/trumbowyg.min.js}"></script>
+    <script defer th:src="@{/static/js-lib/trumbowyg/plugins/colors/trumbowyg.colors.min.js}"></script>
+    <script defer th:src="@{/static/js-lib/trumbowyg/plugins/emoji/trumbowyg.emoji.min.js}"></script>
+    <script defer th:src="@{/static/js-lib/trumbowyg/plugins/giphy/trumbowyg.giphy.min.js}"></script>
+    <script defer th:src="@{/static/js-lib/trumbowyg/plugins/plugins/mention/trumbowyg.mention.min.js}"></script>
+    <script defer src="https://cdn.ckeditor.com/ckeditor5/31.1.0/classic/ckeditor.js"></script>
+    <script defer th:src="@{/static/js/editor-init-on-load.js}"></script>
+</head>
+<body>
+
+<header id="page-header" th:fragment="header">
+    <div id="header-container">
+        <img th:src="@{/static/images/logo.png}" id="company-logo" width="32" height="32" alt="Company Logo"/>
+
+        <nav id="menu-navigation">
+            <div id="hamburger-lines">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <input id="hamburger" type="checkbox"/>
+
+            <label for="hamburger" id="hamburger-label"></label>
+
+            <ul class="menu-container">
+                <li class="menu-item"><a href="/">home</a></li>
+                <li class="menu-item"><a href="/event/view-all">events</a></li>
+                <li class="menu-item"><a href="/project/view-all">projects</a></li>
+                <li class="menu-item"><a href="/event/create">host event</a></li>
+                <li class="menu-item"><a href="/submission/create">create submission</a></li>
+            </ul>
+        </nav>
+
+        <div id="logged-user-menu">
+            <img th:src="@{/static/images/avatar-man.png}" id="logged-user-avatar-menu" class="logged-user-avatar"
+                 width="32" height="32" alt="User Avatar"/>
+            <input id="logged-user-menu-checkbox" type="checkbox"/>
+
+            <ul class="menu-container">
+                <li class="menu-item"><a href="/perform_logout">sign out</a></li>
+            </ul>
+
+        </div>
+    </div>
+</header>
+
+<footer id="page-footer" th:fragment="footer">
+    <link rel="stylesheet" th:href="@{/static/styles/new/footer.css}"/>
+    <p>Copyright &copy; :)</p>
+</footer>
+
+</body>
+</html>

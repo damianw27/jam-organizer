@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/html">
+
+<!-- /* @thymesVar id="projects" type="java.util.List<pl.wilenskid.jamorganizer.entity.bean.ProjectBean>" */ -->
+<!-- /* @thymesVar id="project" type=pl.wilenskid.jamorganizer.entity.bean.ProjectBean" */ -->
+<!-- /* @thymesVar id="projectsPageIndexes" type="java.util.List<java.lang.Integer>" */ -->
+<!-- /* @thymesVar id="_projectsPageIndex" type="java.lang.Integer" */ -->
+
+
+<head th:replace="fragments/base-page.html :: baseHead('meetGameDev -- Project View All')"></head>
+<body>
+
+<header th:replace="fragments/base-page.html :: header"></header>
+
+<div id="content-section">
+    <main id="content">
+        <div class="header-with-action">
+            <h1>Projects</h1>
+            <div class="btn-group btn-group-right">
+                <a th:replace="fragments/button.html::linkButtonPrimary('Create', 'buttonCreateProject', '/project/create')"></a>
+            </div>
+        </div>
+
+        <table class="tbl">
+            <thead class="tbl-head">
+            <tr>
+                <th class="tbl-head-cell">Logo</th>
+                <th class="tbl-head-cell">Name</th>
+                <th class="tbl-head-cell tbl-head-cell-right">Actions</th>
+            </tr>
+            </thead>
+
+            <tbody class="tbl-body">
+            <tr class="tbl-body-row" th:each="project : ${projects}">
+                <td class="tbl-body-cell tbl-body-cell-img" th:utext="'<img height=\'80\' src=' + ${project.getLogoLink()} + ' alt=\'Event Logo\' />'"></td>
+                <td class="tbl-body-cell" th:text="${project.getTitle()}"></td>
+                <td class="tbl-body-cell tbl-body-cell-right">
+                    <a th:replace="fragments/button.html :: linkButtonNormal('View', 'buttonView' + ${project.getId()}, '/project/view?projectId=' + ${project.getId()})"></a>
+                    <a th:replace="fragments/button.html :: linkButtonError('Delete', 'buttonDeleteProject' + ${project.getId()}, '/prject/view-delete?projectId=' + ${project.getId()})"></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="btn-group btn-group-slim btn-group-center">
+            <a th:each="index : ${projectsPageIndexes}"
+               th:class="'a-btn a-btn-slim btn'"
+               th:classappend="${index.toString() == _projectsPageIndex ? 'btn-primary' : ''}"
+               th:text="${index + 1}"
+               th:href="'/project/view-all?projectsPageIndex=' + ${index}"
+            ></a>
+        </div>
+    </main>
+
+
+
+
+</div>
+
+<footer th:replace="fragments/base-page.html :: footer"></footer>
+
+</body>
+</html>

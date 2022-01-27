@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- /* @thymesVar id="comment" type="pl.wilenskid.jamorganizer.entity.bean.CommentBean" */ -->
+<!-- /* @thymesVar id="reportReasons" type="java.util.List<pl.wilenskid.jamorganizer.entity.bean.ReportReasonBean>" */ -->
+<!-- /* @thymesVar id="reportReason" type="pl.wilenskid.jamorganizer.entity.bean.ReportReasonBean" */ -->
+
+<head th:replace="fragments/base-page.html::baseHead('meetGameDev -- Report Comment')"></head>
+<body>
+
+<header th:replace="fragments/base-page.html::header"></header>
+
+<div id="content-section-form">
+    <h1 id="form-title">Report Comment</h1>
+
+    <main id="content">
+        <p>
+            You are trying to report comment:
+        </p>
+
+        <div class="comment-container">
+            <div class="comment-head">
+                <div class="comment-author-details">
+                    <a
+                        class="comment-author-link"
+                        th:href="'/user/view?userId=' + ${comment.getAuthor().getId()}"
+                        th:text="${comment.getAuthor().getDisplayName()}"
+                    >
+                    </a>
+                    <span
+                        class="comment-link"
+                        th:text="'(' + ${comment.getCreated()} + ')'"
+                    >
+                    </span>
+                </div>
+                <div class="btn-group btn-group-right">
+                </div>
+            </div>
+            <div
+                class="comment-content"
+                th:utext="${comment.getCommentContent().getContent()}"
+            >
+            </div>
+        </div>
+
+        <p>
+            Please select reason and explain details of what kind of problem you faced while reading this
+            comment. The moderator will read your description and decide it is legal in case of terms of our
+            application. Remember that if the accusations presented in description are not matching reality, yours
+            account will be held accountable.
+        </p>
+
+        <p>
+            The project will be deleted or hidden only when moderator review this request
+            and in his opinion this project breaks any of service rule.
+        </p>
+
+        <form class="form" th:method="put" th:action="@{/project}">
+            <ul class="fields-container">
+                <li class="field-container" th:fragment="descriptionField (fieldName, label, value, required)">
+                    <label>
+                        <span th:utext="'Reason <span class=\'required\'>*</span>'"></span>
+                        <label th:each="reportReason : ${reportReasons}" class="radio-label">
+                            <input class="radio-input" type="radio" th:value="${reportReason.getId()}" name="reportReasonId">
+                            <th:block th:text="${reportReason.getLabel()}"></th:block>
+                        </label>
+                        <label class="radio-label">
+                            <input class="radio-input" type="radio" value="-1" name="reportReasonId"> Other
+                        </label>
+                    </label>
+                </li>
+                <li th:replace="fragments/fields.html::descriptionField('description', 'Description', '', false)"></li>
+            </ul>
+
+            <div class="btn-group btn-group-right">
+                <button th:replace="fragments/button.html::submitPrimary('Report', 'submitReport')"></button>
+            </div>
+
+        </form>
+    </main>
+</div>
+
+<footer th:replace="fragments/base-page.html::footer"></footer>
+
+</body>
+</html>

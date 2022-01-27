@@ -3,7 +3,7 @@ package pl.wilenskid.jamorganizer.action;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import pl.wilenskid.jamorganizer.enums.ApplicationUserRole;
+import pl.wilenskid.jamorganizer.enums.UserRole;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public abstract class BaseAction {
     private final String baseTemplatePath;
@@ -38,7 +39,7 @@ public abstract class BaseAction {
 
     public abstract void onLoad(HttpServletRequest request, HttpServletResponse response, Map<String, String> pathParams) throws Exception;
 
-    public abstract List<ApplicationUserRole> getAllowedRoles();
+    public abstract List<UserRole> getAllowedRoles();
 
     private void putMethodsAndFields(Model model) {
         Class<? extends BaseAction> actionClass = this.getClass();
@@ -85,7 +86,7 @@ public abstract class BaseAction {
         String[] endpointParts = endpoint.split("\\?");
 
         if (endpointParts.length == 1) {
-            return null;
+            return new HashMap<>();
         }
 
         String paramsPart = endpointParts[1];
@@ -94,7 +95,7 @@ public abstract class BaseAction {
             .map(parameterString -> parameterString.split("="))
             .filter(paramData -> paramData.length == 2)
             .map(parameter -> Map.of(parameter[0], parameter[1]))
-            .collect(HashMap::new, Map::putAll, Map::putAll);
+            .collect(HashMap::new, HashMap::putAll, HashMap::putAll);
 //            .forEach((paramData) -> {
 //                System.out.println(Arrays.toString(paramData));
 //                model.addAttribute("_" + paramData[0], paramData[1]);

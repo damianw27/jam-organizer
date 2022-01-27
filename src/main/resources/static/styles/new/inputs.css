@@ -1,0 +1,123 @@
+input, textarea, select {
+  box-shadow: rgb(171 172 175) 0 0 0 2px inset;
+  -webkit-box-shadow: rgb(171 172 175) 0 0 0 2px inset;
+  -moz-box-shadow: rgb(171 172 175) 0 0 0 2px inset;
+  background-color: rgb(235, 236, 240);
+  color: rgb(9, 30, 66);
+  cursor: text;
+  border-radius: 0.4rem;
+  box-sizing: border-box;
+  font-size: 14px;
+  transition: 0.3s;
+  line-height: 1.42857;
+  padding: 1.4rem 1rem;
+  height: 36px;
+  border-style: none;
+  outline-style: none;
+  width: 100%;
+  max-width: 100%;
+}
+
+input[type=file] {
+  font-size: 12px;
+  height: fit-content;
+  padding: 0.9rem;
+}
+
+input[type=file]::file-selector-button {
+  display: none;
+}
+
+input[type=file]::-ms-browse {
+  display: none;
+}
+
+input[type=file]::-webkit-file-upload-button {
+  display: none;
+}
+
+input:hover {
+  background-color: rgb(250, 251, 252);
+}
+
+input:focus {
+  background-color: rgb(250, 251, 252);
+}
+
+form {
+  max-width: 800px;
+  margin: auto;
+}
+
+.fields-container {
+  margin: 0 auto;
+  padding: 20px 0;
+  font: 13px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+.fields-container:first-child {
+  margin: 0 auto;
+  padding: 0;
+  font: 13px "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+.field-container {
+  padding: 0;
+  display: block;
+  list-style: none;
+  margin: 10px 0;
+}
+
+.field-container label {
+  display: block;
+}
+
+.field-container label > span {
+  width: 100px;
+  font-weight: bold;
+  color: dimgray;
+  padding-left: 10px;
+  margin-bottom: 5px;
+}
+
+.field-container span.required {
+  color: red;
+}
+
+.form-link {
+  display: block;
+  padding: 10px 0;
+  text-align: right;
+}
+
+.input-compact {
+  padding: 1rem 1rem;
+}
+
+.inline-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.radio-label {
+  display: flex !important;
+  align-items: center;
+  flex-direction: row;
+}
+
+.radio-input {
+  width: 15px;
+  padding: 0;
+  margin: 0 5px;
+}
+
+.radio-input:hover {
+  background-color: transparent;
+}
+
+.radio-input:focus {
+  background-color: transparent;
+}
+
+

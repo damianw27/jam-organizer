@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml"
+      lang="pl">
+
+<!-- /* @thymesVar id="event" type="pl.wilenskid.jamorganizer.entity.bean.EventBean" */ -->
+<!-- /* @thymesVar id="organizers" type="java.util.List<pl.wilenskid.jamorganizer.entity.bean.UserBean>" */ -->
+<!-- /* @thymesVar id="judges" type="java.util.List<pl.wilenskid.jamorganizer.entity.bean.UserBean>" */ -->
+<!-- /* @thymesVar id="allUsers" type="java.util.List<pl.wilenskid.jamorganizer.entity.bean.UserBean>" */ -->
+<!-- /* @thymesVar id="projects" type="java.util.List<pl.wilenskid.jamorganizer.entity.bean.ProjectBean>" */ -->
+<!-- /* @thymesVar id="winners" type="java.util.List<pl.wilenskid.jamorganizer.entity.bean.ProjectBean>" */ -->
+<!-- /* @thymesVar id="submissions" type="java.util.List<pl.wilenskid.jamorganizer.entity.bean.SubmissionBean>" */ -->
+<!-- /* @thymesVar id="criteria" type="java.util.List<pl.wilenskid.jamorganizer.entity.bean.CriterionBean>" */ -->
+<!-- /* @thymesVar id="project" type="pl.wilenskid.jamorganizer.entity.bean.ProjectBean" */ -->
+<!-- /* @thymesVar id="user" type="pl.wilenskid.jamorganizer.entity.bean.UserBean" */ -->
+<!-- /* @thymesVar id="submission" type="pl.wilenskid.jamorganizer.entity.bean.SubmissionBean" */ -->
+<!-- /* @thymesVar id="criterion" type="pl.wilenskid.jamorganizer.entity.bean.CriterionBean" */ -->
+<!-- /* @thymesVar id="userBean" type="pl.wilenskid.jamorganizer.entity.bean.UserBean" */ -->
+<!-- /* @thymesVar id="timeService" type="pl.wilenskid.jamorganizer.service.TimeService" */ -->
+<!-- /* @thymesVar id="isLoggedUserOrganizer" type="java.lang.Boolean" */ -->
+<!-- /* @thymesVar id="_focusOrganizerId" type="java.lang.Boolean" */ -->
+<!-- /* @thymesVar id="_focusJudgeId" type="java.lang.Boolean" */ -->
+<!-- /* @thymesVar id="_focusCriterionLabel" type="java.lang.Boolean" */ -->
+
+<head th:replace="fragments/base-page.html :: baseHead('meetGameDev -- Create Event')"></head>
+<body>
+
+<header th:replace="fragments/base-page.html :: header"></header>
+
+<div id="content-section">
+    <main id="content">
+
+        <div class="header-with-action">
+            <h1 th:text="${event.getName()}"></h1>
+            <div class="btn-group btn-group-right">
+                <a th:replace="fragments/button.html::linkButtonNormal('Edit', 'buttonEdit', '/event/edit?eventId=' + ${event.getId()})"></a>
+                <a th:replace="fragments/button.html::linkButtonError('Delete', 'buttonDelete', '/event/delete?eventId=' + ${event.getId()})"></a>
+            </div>
+        </div>
+
+        <div th:utext="${event.getDescriptionContent()}"></div>
+
+        <table class="tbl">
+            <tbody class="tbl-body">
+            <tr class="tbl-body-row">
+                <td class="tbl-body-cell">Start Date</td>
+                <td class="tbl-body-cell tbl-body-cell-right"><b th:text="${event.getSubmissionsStart()}"></b></td>
+            </tr>
+            <tr class="tbl-body-row">
+                <td class="tbl-body-cell">End Date</td>
+                <td class="tbl-body-cell tbl-body-cell-right"><b th:text="${event.getSubmissionsEnd()}"></b></td>
+            </tr>
+            <tr class="tbl-body-row">
+                <td class="tbl-body-cell">Judgments Start Date</td>
+                <td class="tbl-body-cell tbl-body-cell-right"><b th:text="${event.getJudgementsStart()}"></b></td>
+            </tr>
+            <tr class="tbl-body-row">
+                <td class="tbl-body-cell">Judgments End Date</td>
+                <td class="tbl-body-cell tbl-body-cell-right"><b th:text="${event.getJudgementsEnd()}"></b></td>
+            </tr>
+            <tr class="tbl-body-row">
+                <td class="tbl-body-cell">Results Date</td>
+                <td class="tbl-body-cell tbl-body-cell-right"><b th:text="${event.getResultsDate()}"></b></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <h3>Organizers</h3>
+
+        <table class="tbl">
+            <tbody class="tbl-body">
+            <tr class="tbl-body-row" th:each="user: ${organizers}">
+                <td class="tbl-body-cell tbl-body-cell-img"
+                    th:utext="'<img height=\'80\' src=' + ${user.getId()} + ' alt=\'Avatar\' />'"></td>
+                <td class="tbl-body-cell">
+                    <a th:text="${user.getDisplayName()}"
+                       th:href="'/user/view?userId=' + ${user.getId()}">
+                    </a>
+                </td>
+                <td class="tbl-body-cell tbl-body-cell-right">
+                    <form th:if="${isLoggedUserOrganizer}"
+                          th:method="delete"
+                          th:action="@{/event/organizer/remove/{eventId}/{userId}(eventId=*{event.getId()}, userId=*{user.getId()})}">
+                        <button
+                            th:replace="fragments/button.html::submitError('Remove', 'submitRemoveOrganizer' + ${user.getId()})">
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <form th:if="${isLoggedUserOrganizer}" class="inline-form" method="post"
+              th:action="@{/event/organizer/{id}(id=*{event.getId()})}">
+            <label for="organizerId"></label>
+            <input th:autofocus="${_focusOrganizerId}" class="input-compact" list="organizers" id="organizerId"
+                   name="organizerId" placeholder="Select user"/>
+            <datalist id="organizers">
+                <option th:each="userBean : ${allUsers}" th:value="${userBean.getId()}"
+                        th:text="${userBean.getDisplayName()}">Dog
+                </option>
+            </datalist>
+            <button
+                th:replace="fragments/button.html :: submitPrimaryInline('Add Organizer', 'submitAddAuthor')"></button>
+        </form>
+
+        <h3>Judges</h3>
+
+        <table class="tbl">
+            <tbody class="tbl-body">
+            <tr class="tbl-body-row" th:each="user: ${judges}">
+                <td class="tbl-body-cell tbl-body-cell-img"
+                    th:utext="'<img height=\'80\' src=' + ${user.getId()} + ' alt=\'Avatar\' />'"></td>
+                <td class="tbl-body-cell">
+                    <a th:text="${user.getDisplayName()}"
+                       th:href="'/user/view?userId=' + ${user.getId()}">
+                    </a>
+                </td>
+                <td class="tbl-body-cell tbl-body-cell-right">
+                    <form th:if="${isLoggedUserOrganizer}"
+                          th:method="delete"
+                          th:action="'/event/judge/remove/' + ${event.getId()} + '/' + ${user.getId()}">
+                        <button
+                            th:replace="fragments/button.html::submitError('Remove', 'submitRemoveJudge' + ${user.getId()})">
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <form th:if="${isLoggedUserOrganizer}" class="inline-form" method="post"
+              th:action="@{/event/judge/{id}(id=*{event.getId()})}">
+            <label for="judgeId"></label>
+            <input th:autofocus="${_focusJudgeId}" class="input-compact" list="judges" id="judgeId" name="judgeId"
+                   placeholder="Select user"/>
+            <datalist id="judges">
+                <option th:each="userBean : ${allUsers}" th:value="${userBean.getId()}"
+                        th:text="${userBean.getDisplayName()}">Dog
+                </option>
+            </datalist>
+            <button th:replace="fragments/button.html :: submitPrimaryInline('Add Judge', 'submitAddAuthor')"></button>
+        </form>
+
+        <h3>Criteria</h3>
+
+        <table class="tbl">
+            <thead class="tbl-head">
+            <tr>
+                <th class="tbl-head-cell">Label</th>
+                <th class="tbl-head-cell">Priority</th>
+                <th class="tbl-head-cell tbl-head-cell-right">Actions</th>
+            </tr>
+            </thead>
+            <tbody class="tbl-body">
+            <tr class="tbl-body-row" th:each="criterion: ${criteria}">
+                <td class="tbl-body-cell" th:text="${criterion.getLabel()}">
+                </td>
+                <td class="tbl-body-cell" th:text="${criterion.getPriority()}">
+                </td>
+                <td class="tbl-body-cell tbl-body-cell-right">
+                    <form th:if="${isLoggedUserOrganizer}"
+                          th:method="delete"
+                          th:action="@{/criterion/{criterionId}(criterionId=*{criterion.getId()})}">
+                        <button
+                            th:replace="fragments/button.html::submitError('Remove', 'submitRemoveCriterion' + ${criterion.getId()})">
+                        </button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <form th:if="${isLoggedUserOrganizer}"
+              class="inline-form"
+              method="post"
+              th:action="@{/criterion}">
+            <label for="label"></label>
+            <input th:autofocus="${_focusCriterionLabel}"
+                   class="input-compact"
+                   type="text"
+                   id="label"
+                   name="label"
+                   placeholder="Label"/>
+            <label for="priority"></label>
+            <input class="input-compact"
+                   type="number"
+                   id="priority"
+                   name="priority"
+                   placeholder="Value 1-5"/>
+            <input type="hidden"
+                   id="eventId"
+                   name="eventId"
+                   th:value="${event.getId()}"/>
+            <button
+                th:replace="fragments/button.html :: submitPrimaryInline('Add Criterion', 'submitAddCriterion')"></button>
+        </form>
+
+        <h3>Winner</h3>
+
+        <th:block th:if="${winners.isEmpty() == false}">
+            <table class="tbl">
+                <thead class="tbl-head">
+                <tr>
+                    <th class="tbl-head-cell">Logo</th>
+                    <th class="tbl-head-cell">Name</th>
+                    <th class="tbl-head-cell tbl-head-cell-right">Actions</th>
+                </tr>
+                </thead>
+
+                <tbody class="tbl-body">
+                <tr class="tbl-body-row" th:each="project : ${winners}">
+                    <td class="tbl-body-cell tbl-body-cell-img"
+                        th:utext="'<img height=\'80\' src=' + ${project.getLogoLink()} + ' alt=\'Event Logo\' />'"></td>
+                    <td class="tbl-body-cell" th:text="${project.getTitle()}"></td>
+                    <td class="tbl-body-cell tbl-body-cell-right">
+                        <a th:replace="fragments/button.html :: linkButtonNormal('View', 'buttonView' + ${project.getId()}, '/project/view?projectId=' + ${project.getId()})"></a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </th:block>
+
+        <form th:if="${isLoggedUserOrganizer}" th:action="'/event/find-winners/' + ${event.getId()}" th:method="put">
+            <div class="btn-group btn-group-right">
+                <button th:replace="fragments/button.html::submitPrimary('Find Winner', 'buttonFindWinner')"></button>
+            </div>
+        </form>
+
+        <h3>Submitted projects</h3>
+        <table class="tbl">
+            <thead class="tbl-head">
+            <tr>
+                <th class="tbl-head-cell">Logo</th>
+                <th class="tbl-head-cell">Name</th>
+                <th class="tbl-head-cell tbl-head-cell-right">Actions</th>
+            </tr>
+            </thead>
+
+            <tbody class="tbl-body">
+            <tr class="tbl-body-row" th:each="submission : ${submissions}">
+                <td class="tbl-body-cell tbl-body-cell-img"
+                    th:utext="'<img height=\'80\' src=' + ${submission.getProject().getLogoLink()} + ' alt=\'Event Logo\' />'"></td>
+                <td class="tbl-body-cell" th:text="${submission.getProject().getTitle()}"></td>
+                <td class="tbl-body-cell tbl-body-cell-right">
+                    <a th:replace="fragments/button.html :: linkButtonNormal('View', 'buttonView' + ${submission.getProject().getId()}, '/project/view?projectId=' + ${submission.getProject().getId()})"></a>
+                    <a th:replace="fragments/button.html :: linkButtonNormal('Submission', 'buttonSubmission' + ${submission.getId()}, '/submission/view?submissionId=' + ${submission.getId()})"></a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </main>
+</div>
+
+<footer th:replace="fragments/base-page.html :: footer"></footer>
+
+</body>
+</html>

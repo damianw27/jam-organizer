@@ -18,7 +18,8 @@ import java.util.Set;
 @Entity(name = "EVENT")
 public class Event extends AbstractPersistable<Long> {
     private String name;
-    private String descriptionLink;
+    private Long descriptionFileId;
+    private Long logoFileId;
     private Calendar submissionsStart;
     private Calendar submissionsEnd;
     private Calendar judgementsStart;
@@ -38,4 +39,12 @@ public class Event extends AbstractPersistable<Long> {
 
     @OneToMany(mappedBy = "event")
     private Set<Submission> submissions;
+
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(
+        name = "EVENT_PROJECT",
+        joinColumns = { @JoinColumn(name = "EVENT_ID") },
+        inverseJoinColumns = { @JoinColumn(name = "PROJECT_ID") }
+    )
+    private Set<Project> winners;
 }

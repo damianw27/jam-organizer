@@ -11,7 +11,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="jam-organizer" target="11" />
+      <module name="jam-organizer" target="17" />
       <module name="jam-organizer-annotations" target="11" />
       <module name="jam-organizer-core" target="11" />
       <module name="meet-game-jam" target="11" />

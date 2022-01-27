@@ -3,7 +3,6 @@ package pl.wilenskid.jamorganizer.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.authentication.configurers.provisioning.InMemoryUserDetailsManagerConfigurer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -12,44 +11,53 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
-import pl.wilenskid.jamorganizer.entity.ApplicationUser;
-import pl.wilenskid.jamorganizer.repository.ApplicationUserRepository;
+import pl.wilenskid.jamorganizer.enums.UserRole;
+import pl.wilenskid.jamorganizer.service.UserAuthorizationService;
 
 import javax.inject.Inject;
 import java.util.List;
-import java.util.Spliterator;
-import java.util.stream.StreamSupport;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    private final ApplicationUserRepository applicationUserRepository;
+
+    private final UserAuthorizationService authorizationService;
 
     @Inject
-    public SecurityConfig(ApplicationUserRepository applicationUserRepository) {
-        this.applicationUserRepository = applicationUserRepository;
+    public SecurityConfig(UserAuthorizationService authorizationService) {
+        this.authorizationService = authorizationService;
     }
 
     @Inject
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        InMemoryUserDetailsManagerConfigurer<AuthenticationManagerBuilder> configurer = auth.inMemoryAuthentication();
-
-        Spliterator<ApplicationUser> usersSpliterator = applicationUserRepository
-            .findAll()
-            .spliterator();
-
-        StreamSupport
-            .stream(usersSpliterator, false)
-            .filter(this::validateUserCanLogin)
-            .forEach(userEntity -> registerUser(userEntity, configurer));
+    public void authorizationConfiguration(AuthenticationManagerBuilder authentication) throws Exception {
+        authentication.userDetailsService(authorizationService);
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-            .antMatchers("/").permitAll();
+        http.cors().and().csrf().disable()
+            .authorizeRequests()
+            .antMatchers("/admin/**").hasRole(UserRole.ADMINISTRATOR.name())
+            .antMatchers("/static/**").permitAll()
+            .antMatchers("/user/login").permitAll()
+            .antMatchers("/user/create").permitAll()
+            .antMatchers("/user/forget-pass").permitAll()
+            .antMatchers("/user/register").permitAll()
+            .anyRequest().authenticated()
+            .and()
+            .formLogin()
+            .loginPage("/user/login")
+            .loginProcessingUrl("/perform_login")
+            .defaultSuccessUrl("/", true)
+            .failureUrl("/user/login?error=true")
+            .and()
+            .logout()
+            .logoutUrl("/perform_logout")
+            .deleteCookies("JSESSIONID");
 
-        http.cors().and().csrf().disable();
+        http.headers()
+            .frameOptions()
+            .sameOrigin();
     }
 
     @Bean
@@ -69,22 +77,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return source;
     }
 
-    private boolean validateUserCanLogin(ApplicationUser applicationUser) {
-        return applicationUser.getName() != null
-            && applicationUser.getApplicationUserRole() != null;
-    }
-
-    private void registerUser(ApplicationUser applicationUser, InMemoryUserDetailsManagerConfigurer<?> configurer) {
-        String encodedPassword = passwordEncoder()
-            .encode("test");
-
-        String userName = applicationUser
-            .getApplicationUserRole()
-            .name();
-
-        configurer
-            .withUser(applicationUser.getName())
-            .password(encodedPassword)
-            .authorities(userName);
-    }
 }

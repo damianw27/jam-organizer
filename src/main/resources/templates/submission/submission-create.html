@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- /* @thymesVar id="projects" type="java.util.List<pl.wilenskid.jamorganizer.entity.Project>" */ -->
+<!-- /* @thymesVar id="project" type="pl.wilenskid.jamorganizer.entity.Project" */ -->
+<!-- /* @thymesVar id="events" type="java.util.List<pl.wilenskid.jamorganizer.entity.Event>" */ -->
+<!-- /* @thymesVar id="event" type="pl.wilenskid.jamorganizer.entity.Event" */ -->
+
+<head th:replace="fragments/base-page.html :: baseHead('meetGameDev -- Create Submission')"></head>
+<body>
+
+<header th:replace="fragments/base-page.html :: header"></header>
+
+<div id="content-section-form">
+    <h1 id="form-title">Create Submission</h1>
+
+    <main id="content">
+        <form class="form" method="post" th:action="@{/submission}">
+            <ul class="fields-container">
+                <li th:replace="fragments/fields :: projectSelectField ('projectId', 'Project', ${projects}, true)"></li>
+                <li th:replace="fragments/fields :: eventSelectField ('eventId', 'Event', ${events}, true)"></li>
+            </ul>
+
+            <div class="btn-group btn-group-right">
+                <button th:replace="fragments/button.html::submitPrimary('Create', 'submitCreate')"></button>
+            </div>
+        </form>
+    </main>
+</div>
+
+<footer th:replace="fragments/base-page.html::footer"></footer>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pl"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns="http://www.w3.org/1999/xhtml">
+
+<!-- /* @thymesVar id="event" type="pl.wilenskid.jamorganizer.entity.bean.EventBean" */ -->
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title></title>
+</head>
+<body>
+<table>
+    <tr class="event-item" th:fragment="eventItem(event)">
+        <td class="event-item-top" width="200">
+            <img
+                width="200"
+                height="140"
+                src="https://e7.pngegg.com/pngimages/317/974/png-clipart-m-brace-moments-event-center-logo-brand-event-management-font-elegant-events-and-party-rentals-llc.png"
+                alt="Project Logo"
+            />
+        </td>
+        <td>
+            <div class="event-description">
+                <h3><a th:href="@{/event/view?eventId={id}(id=*{event.getId()})}" th:text="${event.getName()}"></a></h3>
+                <p>short desc</p>
+            </div>
+        </td>
+    </tr>
+</table>
+</body>
+</html>

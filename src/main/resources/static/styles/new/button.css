@@ -1,0 +1,118 @@
+.btn {
+  min-width: 100px;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  background: var(--button-normal);
+  color: var(--button-normal-text);
+  padding: 8px 16px;
+  font-family: inherit;
+  font-size: 16px;
+  cursor: pointer;
+  letter-spacing: 1px;
+}
+
+.btn:hover {
+  background: var(--button-normal-hover);
+}
+
+.btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px var(--button-normal-focus);
+}
+
+.btn-primary {
+  background: var(--button-primary);
+  color: var(--button-primary-text);
+}
+
+.btn-primary:hover {
+  background: var(--button-primary-hover);
+}
+
+.btn-primary:focus {
+  box-shadow: 0 0 0 4px var(--button-primary-focus);
+}
+
+.btn-warning {
+  background: var(--button-warning);
+  color: var(--button-warning-text);
+}
+
+.btn-warning:hover {
+  background: var(--button-warning-hover);
+}
+
+.btn-warning:focus {
+  box-shadow: 0 0 0 4px var(--button-warning-focus);
+}
+
+.btn-error {
+  background: var(--button-error);
+  color: var(--button-error-text);
+}
+
+.btn-error:hover {
+  background: var(--button-error-hover);
+}
+
+.btn-error:focus {
+  box-shadow: 0 0 0 4px var(--button-error-focus);
+}
+
+.a-btn, .a-btn:hover, .a-btn:focus, .a-btn:active {
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+}
+
+.btn[disabled] {
+  color: #d2d5db;
+  background: #6c7589;
+  cursor: not-allowed;
+}
+
+.btn-inline-form {
+  margin-left: 5px;
+  min-width: 150px;
+}
+
+.btn-group {
+  font-size: 0;
+  margin: 10px 0;
+}
+
+.btn-group-slim {
+  font-size: 0;
+}
+
+.btn-group-right {
+  text-align: right;
+}
+
+.btn-group-center {
+  text-align: center;
+}
+
+.btn-group > .btn {
+  border-radius: 0;
+  margin: 0;
+}
+
+.btn-group .btn:first-child {
+  border-bottom-left-radius: 5px;
+  border-top-left-radius: 5px;
+}
+
+.btn-group .btn:last-child {
+  border-bottom-right-radius: 5px;
+  border-top-right-radius: 5px;
+}
+
+.a-btn-slim {
+  padding: 3px 5px;
+  min-width: inherit;
+}
